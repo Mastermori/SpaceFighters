@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art/backgrounds/clouds-transparent.png" type="Texture" id=1]
+[ext_resource path="res://clouds/Cloud.gd" type="Script" id=2]
+
+[node name="Cloud" type="Sprite"]
+scale = Vector2( 2.37094, 2.1789 )
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 128.375, 55.4822 )
+scale = Vector2( 12.7888, 5.52514 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
