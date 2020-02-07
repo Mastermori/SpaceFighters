@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://art/ships/ship.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 220, 210 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.33225
@@ -110,6 +113,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+keep_in_rect = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2.5, 2.5 )
