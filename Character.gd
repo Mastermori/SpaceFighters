@@ -13,14 +13,21 @@ var vel := Vector2.ZERO
 var last_damaged_by
 var health := max_health
 
+onready var anim_player := $AnimationPlayer
+
 
 func take_damage(amount : float, caused_by):
 	health -= amount
 	last_damaged_by = caused_by
 	if health <= 0:
 		die()
+	else:
+		if anim_player:
+			anim_player.play("hit")
 
 func die():
+	if anim_player:
+		anim_player.play("die")
 	emit_signal("died", last_damaged_by)
 
 func apply_movement(acceleration : Vector2):

@@ -9,7 +9,6 @@ var invincible := false
 var lock := false
 
 
-onready var anim_player : Timer = $AnimationPlayer
 onready var resawn_timer : Timer = $RespawnTimer
 onready var invin_timer : Timer = $InvincibilityTimer
 onready var sprite : Sprite = $Sprite
@@ -56,7 +55,6 @@ func keep_in_bounds(delta):
 		position.y -= sign(spawn_dist.y) * pow(abs(spawn_dist.y)-keep_in_rect.extents.y, 1.5) * delta
 
 func die():
-	anim_player.play("die")
 	resawn_timer.start()
 	.die()
 
