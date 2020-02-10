@@ -16,6 +16,7 @@ onready var sprite : Sprite = $Sprite
 onready var spawn_position := position
 
 func _ready():
+	Globals.player = self
 	respawn()
 
 func _physics_process(delta):

@@ -12,6 +12,7 @@ onready var cloud_timer := $CloudTimer
 func _ready():
 	spawn_random_cloud()
 	start_timer()
+	print("ready level1")
 
 func start_timer():
 	cloud_timer.start(cloud_timer_min + randf() * cloud_timer_max)
