@@ -5,7 +5,6 @@ class_name Player
 export(RectangleShape2D) var keep_in_rect : RectangleShape2D
 
 
-var invincible := false
 var lock := false
 
 
@@ -17,8 +16,6 @@ onready var player_anims := $PlayerAnimations
 onready var spawn_position := position
 
 func _ready():
-	print("ready player")
-	print($PlayerAnimations)
 	Globals.player = self
 	respawn()
 
@@ -59,26 +56,26 @@ func keep_in_bounds(delta):
 		position.y -= sign(spawn_dist.y) * pow(abs(spawn_dist.y)-keep_in_rect.extents.y, 1.5) * delta
 
 func die():
+	print("player died to " + last_damaged_by.name)
 	resawn_timer.start()
 	.die()
 
 func respawn():
-	sprite.frame = 2
 	character_anims.play("respawn")
 	player_anims.play("fly_straight")
-	invincible = true
+	health = max_health
 	lock = true
 	invin_timer.start()
 
 
 func _on_RespawnTimer_timeout():
 	respawn()
+	print("player respawning")
 
 func _on_InvincibilityTimer_timeout():
-	invincible = false
+	$Collider.set_deferred("disabled", false)
 
 func _on_CharacterAnimations_animation_finished(anim_name):
-	print("CharacterAnimations in Player")
 	if anim_name == "respawn":
 		lock = false
 

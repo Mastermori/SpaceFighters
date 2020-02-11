@@ -12,14 +12,13 @@ export(Globals.Factions) var faction := Globals.Factions.NEUTRAL
 
 var vel := Vector2.ZERO
 var last_damaged_by
-var health := max_health
+onready var health := max_health
 
 onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var bullet_spawn : Position2D = $BulletSpawn
 
 func _ready():
-	print("ready character")
-	print(character_anims)
+	pass
 
 func shoot(projectile : Projectile, vel : Vector2):
 	projectile.init(vel, self)
@@ -30,7 +29,6 @@ func shoot(projectile : Projectile, vel : Vector2):
 func take_damage(amount : float, caused_by):
 	health -= amount
 	last_damaged_by = caused_by
-	print(name + " took " + str(amount) + " damage. Now at: " + str(health))
 	if health <= 0:
 		die()
 	else:
@@ -38,6 +36,7 @@ func take_damage(amount : float, caused_by):
 
 func die():
 	character_anims.play("die")
+	$Collider.set_deferred("disabled", true)
 	emit_signal("died", last_damaged_by)
 
 func apply_movement(acceleration : Vector2):
