@@ -23,7 +23,6 @@ func _process(delta):
 	follow.offset += speed * delta
 	if left_screen and bullet_spawn.get_child_count() == 0:
 		queue_free()
-		print("enemy queued for deletion")
 
 func _on_VisibilityNotifier2D_screen_entered():
 	speed = onscreen_speed
@@ -38,5 +37,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_ShootTimer_timeout():
 	if on_screen:
-		var dir = (Globals.player.global_position - global_position).normalized()
+		var dir = (Globals.player.get_node("Collider").global_position - global_position).normalized()
 		shoot(preload("res://projectiles/Projectile.tscn").instance(), dir * shot_speed)

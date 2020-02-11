@@ -5,12 +5,13 @@
 [ext_resource path="res://art/ships/enemy-small.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.5, 4 )
+extents = Vector2( 4.59724, 7.50863 )
 
 [node name="Enemy" groups=[
 "enemy",
 ] instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+max_health = 20.0
 
 [node name="Sprite" parent="." index="0"]
 rotation = -1.5708
@@ -25,7 +26,8 @@ position = Vector2( 7, 0 )
 scale = Vector2( 3, 3 )
 
 [node name="Collider" parent="." index="2"]
-position = Vector2( 0, 3.3 )
+visible = false
+position = Vector2( 4.5, 0 )
 shape = SubResource( 1 )
 
 [node name="BulletSpawn" parent="." index="4"]
@@ -34,6 +36,7 @@ position = Vector2( 22.5587, -0.0584259 )
 [node name="ShootTimer" type="Timer" parent="." index="5"]
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="6"]
+visible = false
 position = Vector2( 2.75004, 0.485302 )
 scale = Vector2( 2.2103, 2.2103 )
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
