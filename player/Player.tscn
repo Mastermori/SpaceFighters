@@ -3,7 +3,7 @@
 [ext_resource path="res://Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 210, 350 )
 
 [sub_resource type="Animation" id=2]
@@ -101,7 +101,7 @@ acceleration = 2000
 max_speed = 700
 max_health = 30.0
 faction = 0
-keep_in_rect = SubResource( 7 )
+keep_in_rect = SubResource( 1 )
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="." index="5"]
 anims/fly_left = SubResource( 2 )
@@ -114,6 +114,9 @@ anims/fly_straight = SubResource( 6 )
 one_shot = true
 
 [node name="RespawnTimer" type="Timer" parent="." index="7"]
+one_shot = true
+
+[node name="ShootTimer" type="Timer" parent="." index="8"]
 one_shot = true
 [connection signal="animation_finished" from="PlayerAnimations" to="." method="_on_PlayerAnimations_animation_finished"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]

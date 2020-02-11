@@ -3,6 +3,8 @@ extends Character
 class_name Player
 
 export(RectangleShape2D) var keep_in_rect : RectangleShape2D
+export var shot_speed := 400.0
+export var shoot_delay := .15
 
 
 var lock := false
@@ -12,6 +14,7 @@ onready var resawn_timer : Timer = $RespawnTimer
 onready var invin_timer : Timer = $InvincibilityTimer
 onready var sprite : Sprite = $Sprite
 onready var player_anims := $PlayerAnimations
+onready var shoot_timer := $ShootTimer
 
 onready var spawn_position := position
 
@@ -41,6 +44,10 @@ func _physics_process(delta):
 				player_anims.play("fly_straight")
 		keep_in_bounds(delta)
 		vel = move_and_slide(vel)
+		
+		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
+			shoot(preload("res://projectiles/OrangeProjectile.tscn").instance(), Vector2.UP * shot_speed)
+			shoot_timer.start(shoot_delay)
 
 func get_move_dir() -> Vector2:
 	var dir := Vector2.ZERO
@@ -75,9 +82,9 @@ func _on_RespawnTimer_timeout():
 func _on_InvincibilityTimer_timeout():
 	$Collider.set_deferred("disabled", false)
 
-func _on_CharacterAnimations_animation_finished(anim_name):
+func anim_finished(anim_name):
 	if anim_name == "respawn":
 		lock = false
 
 func _on_PlayerAnimations_animation_finished(anim_name):
-	pass
+	anim_finished(anim_name)

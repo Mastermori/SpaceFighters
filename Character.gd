@@ -12,6 +12,8 @@ export(Globals.Factions) var faction := Globals.Factions.NEUTRAL
 
 var vel := Vector2.ZERO
 var last_damaged_by
+var dead := false
+var dying := false
 onready var health := max_health
 
 onready var character_anims : AnimationPlayer = $CharacterAnimations
@@ -35,6 +37,7 @@ func take_damage(amount : float, caused_by):
 		character_anims.play("hit")
 
 func die():
+	dying = true
 	character_anims.play("die")
 	$Collider.set_deferred("disabled", true)
 	emit_signal("died", last_damaged_by)
@@ -50,6 +53,10 @@ func apply_friction(amount : float):
 	else:
 		vel = Vector2.ZERO
 
+func anim_finished(anim_name):
+	pass
 
-func _on_CharacterAnimations_animation_finished(_anim_name):
-	print("CharacterAnimations in Character")
+func _on_CharacterAnimations_animation_finished(anim_name):
+	if anim_name == "die":
+		dead = true
+	anim_finished(anim_name)
