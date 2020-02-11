@@ -2,11 +2,12 @@ extends Character
 
 class_name Enemy
 
-export var onscreen_speed := 350.0
+export var onscreen_speed := 450.0
 export var offscreen_speed := 50
 
-export var init_delay := 1
-export var shoot_delay := 1.5
+export var shot_speed := 400
+export var init_delay := 1.5
+export var shoot_delay := 3
 
 var speed := offscreen_speed
 var on_screen := false
@@ -38,4 +39,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_ShootTimer_timeout():
 	if on_screen:
 		var dir = (Globals.player.global_position - global_position).normalized()
-		shoot(preload("res://projectiles/Projectile.tscn").instance(), dir * 200)
+		shoot(preload("res://projectiles/Projectile.tscn").instance(), dir * shot_speed)

@@ -182,7 +182,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[node name="Player" type="KinematicBody2D" groups=[
+[node name="PlayerOld" type="KinematicBody2D" groups=[
 "player",
 ]]
 script = ExtResource( 2 )

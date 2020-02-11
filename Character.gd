@@ -14,8 +14,12 @@ var vel := Vector2.ZERO
 var last_damaged_by
 var health := max_health
 
-onready var anim_player : AnimationPlayer = $CharacterAnimations
+onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var bullet_spawn : Position2D = $BulletSpawn
+
+func _ready():
+	print("ready character")
+	print(character_anims)
 
 func shoot(projectile : Projectile, vel : Vector2):
 	projectile.init(vel, self)
@@ -30,14 +34,10 @@ func take_damage(amount : float, caused_by):
 	if health <= 0:
 		die()
 	else:
-		if anim_player:
-			anim_player.play("hit")
-			if name == "Player":
-				print("Palyer hit anim played")
+		character_anims.play("hit")
 
 func die():
-	if anim_player:
-		anim_player.play("die")
+	character_anims.play("die")
 	emit_signal("died", last_damaged_by)
 
 func apply_movement(acceleration : Vector2):
@@ -50,3 +50,7 @@ func apply_friction(amount : float):
 		vel -= vel.normalized() * amount
 	else:
 		vel = Vector2.ZERO
+
+
+func _on_CharacterAnimations_animation_finished(_anim_name):
+	print("CharacterAnimations in Character")

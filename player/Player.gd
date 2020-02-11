@@ -12,10 +12,13 @@ var lock := false
 onready var resawn_timer : Timer = $RespawnTimer
 onready var invin_timer : Timer = $InvincibilityTimer
 onready var sprite : Sprite = $Sprite
+onready var player_anims := $PlayerAnimations
 
 onready var spawn_position := position
 
 func _ready():
+	print("ready player")
+	print($PlayerAnimations)
 	Globals.player = self
 	respawn()
 
@@ -24,21 +27,21 @@ func _physics_process(delta):
 		var move_dir := get_move_dir()
 		if move_dir == Vector2.ZERO:
 			apply_friction(deceleration * delta)
-			anim_player.play("fly_straight")
+			player_anims.play("fly_straight")
 		else:
 			apply_movement(move_dir * acceleration * delta)
 			if move_dir.x > 0:
 				if vel.x > max_speed * .9:
-					anim_player.play("fly_right")
+					player_anims.play("fly_right")
 				else:
-					anim_player.play("fly_right_slight")
+					player_anims.play("fly_right_slight")
 			elif move_dir.x < 0:
 				if vel.x < -max_speed * .9:
-					anim_player.play("fly_left")
+					player_anims.play("fly_left")
 				else:
-					anim_player.play("fly_left_slight")
+					player_anims.play("fly_left_slight")
 			else:
-				anim_player.play("fly_straight")
+				player_anims.play("fly_straight")
 		keep_in_bounds(delta)
 		vel = move_and_slide(vel)
 
@@ -61,7 +64,8 @@ func die():
 
 func respawn():
 	sprite.frame = 2
-	anim_player.play("respawn")
+	character_anims.play("respawn")
+	player_anims.play("fly_straight")
 	invincible = true
 	lock = true
 	invin_timer.start()
@@ -73,7 +77,10 @@ func _on_RespawnTimer_timeout():
 func _on_InvincibilityTimer_timeout():
 	invincible = false
 
-
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_CharacterAnimations_animation_finished(anim_name):
+	print("CharacterAnimations in Player")
 	if anim_name == "respawn":
 		lock = false
+
+func _on_PlayerAnimations_animation_finished(anim_name):
+	pass
