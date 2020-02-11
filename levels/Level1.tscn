@@ -12,7 +12,9 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -3.6311, -677.435, 0, 0, 0, 0, -4.00134, 3.65045, 0, 0, 0, 0, 739.739, 798.508 )
 }
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node2D" groups=[
+"level",
+]]
 script = ExtResource( 3 )
 cloud_types = [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
