@@ -43,10 +43,10 @@ func _physics_process(delta):
 			else:
 				player_anims.play("fly_straight")
 		keep_in_bounds(delta)
-		vel = move_and_slide(vel)
+		move_and_collide(vel * delta)
 		
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
-			shoot(preload("res://projectiles/OrangeProjectile.tscn").instance(), Vector2.UP * shot_speed)
+			shoot_projectile(preload("res://projectiles/OrangeProjectile.tscn").instance(), Vector2.UP * shot_speed)
 			shoot_timer.start(shoot_delay)
 
 func get_move_dir() -> Vector2:
@@ -85,6 +85,5 @@ func _on_InvincibilityTimer_timeout():
 func anim_finished(anim_name):
 	if anim_name == "respawn":
 		lock = false
-
-func _on_PlayerAnimations_animation_finished(anim_name):
-	anim_finished(anim_name)
+	else:
+		print(anim_name + " just finished on Player")

@@ -103,6 +103,9 @@ max_health = 30.0
 faction = 0
 keep_in_rect = SubResource( 1 )
 
+[node name="Sprite" parent="." index="0"]
+frame = 0
+
 [node name="PlayerAnimations" type="AnimationPlayer" parent="." index="5"]
 anims/fly_left = SubResource( 2 )
 anims/fly_left_slight = SubResource( 3 )
@@ -118,6 +121,5 @@ one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="." index="8"]
 one_shot = true
-[connection signal="animation_finished" from="PlayerAnimations" to="." method="_on_PlayerAnimations_animation_finished"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

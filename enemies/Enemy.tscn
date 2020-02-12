@@ -10,6 +10,7 @@ extents = Vector2( 4.59724, 7.50863 )
 [node name="Enemy" groups=[
 "enemy",
 ] instance=ExtResource( 2 )]
+collision_layer = 4
 script = ExtResource( 1 )
 max_health = 20.0
 
@@ -29,6 +30,7 @@ scale = Vector2( 3, 3 )
 visible = false
 position = Vector2( 4.5, 0 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="BulletSpawn" parent="." index="4"]
 position = Vector2( 22.5587, -0.0584259 )

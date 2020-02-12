@@ -20,9 +20,15 @@ onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var bullet_spawn : Position2D = $BulletSpawn
 
 func _ready():
+	for node in get_children():
+		if node is AnimationPlayer:
+			node.connect("animation_finished", self, "anim_finished")
+
+# to be overwritten - called when any Animation is finished
+func anim_finished(anim_name):
 	pass
 
-func shoot(projectile : Projectile, vel : Vector2):
+func shoot_projectile(projectile : Projectile, vel : Vector2):
 	projectile.init(vel, self)
 	projectile.set_as_toplevel(true)
 	projectile.global_position = bullet_spawn.global_position
@@ -53,10 +59,6 @@ func apply_friction(amount : float):
 	else:
 		vel = Vector2.ZERO
 
-func anim_finished(anim_name):
-	pass
-
 func _on_CharacterAnimations_animation_finished(anim_name):
 	if anim_name == "die":
 		dead = true
-	anim_finished(anim_name)

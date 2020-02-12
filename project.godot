@@ -115,6 +115,12 @@ player_special={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Obstacle"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
