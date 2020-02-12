@@ -57,11 +57,9 @@ func apply_movement(acceleration : Vector2):
 		vel = vel.normalized() * max_speed
 
 func check_bounds(minx, miny, maxx, maxy) -> bool:
-	if position.x + sprite.texture.get_size().x < 0 or position.x > maxx:
-		return false
-	if position.y + sprite.texture.get_size().y < 0 or position.y > maxy:
-		return false
-	return true
+	var in_x : bool = global_position.x + sprite.texture.get_size().x > minx and global_position.x < maxx
+	var in_y : bool = global_position.y + sprite.texture.get_size().y > miny and global_position.y < maxy
+	return in_x and in_y
 
 func apply_friction(amount : float):
 	if vel.length() > amount:

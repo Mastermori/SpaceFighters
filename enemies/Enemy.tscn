@@ -37,8 +37,4 @@ disabled = true
 position = Vector2( 22.5587, -0.0584259 )
 
 [node name="ShootTimer" type="Timer" parent="." index="5"]
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="6"]
-rect = Rect2( 0, 0, 1, 1 )
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

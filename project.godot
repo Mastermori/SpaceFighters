@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://projectiles/Projectile.gd"
+}, {
+"base": "Enemy",
+"class": "Strafer",
+"language": "GDScript",
+"path": "res://enemies/Strafer.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Enemy": "",
 "Player": "",
-"Projectile": ""
+"Projectile": "",
+"Strafer": ""
 }
 
 [application]

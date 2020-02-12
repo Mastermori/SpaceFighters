@@ -6,7 +6,6 @@
 load_path = "res://.import/ship.png-9f7dcac29f4b016ca46abac3a8dd91e5.stex"
 
 [sub_resource type="StreamTexture" id=2]
-flags = 4
 load_path = "res://.import/explosion.png-cd01013b443e79bef4529591ef769479.stex"
 
 [sub_resource type="CircleShape2D" id=3]
