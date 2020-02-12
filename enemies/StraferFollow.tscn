@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="PathFollow2D" type="PathFollow2D"]
+loop = false

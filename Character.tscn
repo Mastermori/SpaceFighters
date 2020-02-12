@@ -6,12 +6,13 @@
 load_path = "res://.import/ship.png-9f7dcac29f4b016ca46abac3a8dd91e5.stex"
 
 [sub_resource type="StreamTexture" id=2]
+flags = 4
 load_path = "res://.import/explosion.png-cd01013b443e79bef4529591ef769479.stex"
 
-[sub_resource type="CircleShape2D" id=13]
+[sub_resource type="CircleShape2D" id=3]
 radius = 7.08885
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -39,7 +40,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -79,7 +80,7 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=6]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -95,7 +96,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.552941, 0.160784, 0.160784, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=7]
 length = 2.2
 step = 0.05
 tracks/0/type = "value"
@@ -142,13 +143,13 @@ hframes = 5
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7.5 )
 scale = Vector2( 2.5, 2.5 )
-shape = SubResource( 13 )
+shape = SubResource( 3 )
 
 [node name="CharacterAnimations" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 12 )
-anims/die = SubResource( 4 )
-anims/hit = SubResource( 10 )
-anims/respawn = SubResource( 11 )
+anims/default = SubResource( 4 )
+anims/die = SubResource( 5 )
+anims/hit = SubResource( 6 )
+anims/respawn = SubResource( 7 )
 
 [node name="BulletSpawn" type="Position2D" parent="."]
 position = Vector2( 0, -35 )

@@ -5,11 +5,11 @@
 [ext_resource path="res://levels/Level1.gd" type="Script" id=3]
 [ext_resource path="res://art/backgrounds/clouds.png" type="Texture" id=4]
 [ext_resource path="res://art/backgrounds/clouds-transparent.png" type="Texture" id=5]
-[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://enemies/Strafer.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -3.6311, -677.435, 0, 0, 0, 0, -4.00134, 3.65045, 0, 0, 0, 0, 739.739, 798.508 )
+"points": PoolVector2Array( 0, 0, 0, 0, -4.00134, 3.65045, 0, 0, 0, 0, 678.853, 471.032 )
 }
 
 [node name="Level1" type="Node2D" groups=[
@@ -35,143 +35,11 @@ position = Vector2( 303.5, 600 )
 [node name="CloudTimer" type="Timer" parent="."]
 
 [node name="LeftStrafes" type="Path2D" parent="."]
-curve = SubResource( 1 )
-
-[node name="Strafer" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.6311, -677.435 )
-rotation = 1.57134
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer" instance=ExtResource( 6 )]
-
-[node name="Strafer2" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.65831, -627.381 )
-rotation = 1.57134
-offset = 50.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer2" instance=ExtResource( 6 )]
-
-[node name="Strafer3" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.68547, -577.414 )
-rotation = 1.57134
-offset = 100.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer3" instance=ExtResource( 6 )]
-
-[node name="Strafer4" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.82698, -317.099 )
-rotation = 1.57134
-offset = 360.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer4" instance=ExtResource( 6 )]
-
-[node name="Strafer5" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.8379, -297.017 )
-rotation = 1.57134
-offset = 380.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer5" instance=ExtResource( 6 )]
-
-[node name="Strafer6" type="PathFollow2D" parent="LeftStrafes"]
-position = Vector2( -3.8488, -276.961 )
-rotation = 1.57134
-offset = 400.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="LeftStrafes/Strafer6" instance=ExtResource( 6 )]
-
-[node name="RightStrafes" type="Path2D" parent="."]
 position = Vector2( 607, 0 )
 scale = Vector2( -1, 1 )
 curve = SubResource( 1 )
 
-[node name="Strafer" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.6311, -677.435 )
-rotation = 1.57134
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer" instance=ExtResource( 6 )]
-
-[node name="Strafer2" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.65831, -627.381 )
-rotation = 1.57134
-offset = 50.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer2" instance=ExtResource( 6 )]
-
-[node name="Strafer3" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.68547, -577.414 )
-rotation = 1.57134
-offset = 100.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer3" instance=ExtResource( 6 )]
-
-[node name="Strafer4" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.82698, -317.099 )
-rotation = 1.57134
-scale = Vector2( 1, -1 )
-offset = 360.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer4" instance=ExtResource( 6 )]
-
-[node name="Strafer5" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.8379, -297.017 )
-rotation = 1.57134
-scale = Vector2( 1, -1 )
-offset = 380.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer5" instance=ExtResource( 6 )]
-
-[node name="Strafer6" type="PathFollow2D" parent="RightStrafes"]
-position = Vector2( -3.8488, -276.961 )
-rotation = 1.57134
-scale = Vector2( 1, -1 )
-offset = 400.0
-loop = false
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Enemy" parent="RightStrafes/Strafer6" instance=ExtResource( 6 )]
+[node name="Strafer" parent="." instance=ExtResource( 6 )]
+position = Vector2( 16.7018, -187.06 )
+follow_path = NodePath("../LeftStrafes")
 [connection signal="timeout" from="CloudTimer" to="." method="_on_CloudTimer_timeout"]

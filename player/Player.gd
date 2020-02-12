@@ -3,7 +3,7 @@ extends Character
 class_name Player
 
 export(RectangleShape2D) var keep_in_rect : RectangleShape2D
-export var shot_speed := 400.0
+export var shot_speed := 800.0
 export var shoot_delay := .15
 
 
@@ -12,7 +12,6 @@ var lock := false
 
 onready var resawn_timer : Timer = $RespawnTimer
 onready var invin_timer : Timer = $InvincibilityTimer
-onready var sprite : Sprite = $Sprite
 onready var player_anims := $PlayerAnimations
 onready var shoot_timer := $ShootTimer
 
@@ -77,7 +76,6 @@ func respawn():
 
 func _on_RespawnTimer_timeout():
 	respawn()
-	print("player respawning")
 
 func _on_InvincibilityTimer_timeout():
 	$Collider.set_deferred("disabled", false)
@@ -85,5 +83,3 @@ func _on_InvincibilityTimer_timeout():
 func anim_finished(anim_name):
 	if anim_name == "respawn":
 		lock = false
-	else:
-		print(anim_name + " just finished on Player")

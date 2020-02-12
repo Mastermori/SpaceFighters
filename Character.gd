@@ -18,6 +18,9 @@ onready var health := max_health
 
 onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var bullet_spawn : Position2D = $BulletSpawn
+onready var sprite : Sprite = $Sprite
+onready var window_width : int = ProjectSettings.get("display/window/size/width")
+onready var window_height : int = ProjectSettings.get("display/window/size/height")
 
 # to be overwritten - called when any Animation is finished
 func anim_finished(anim_name):
@@ -52,6 +55,13 @@ func apply_movement(acceleration : Vector2):
 	vel += acceleration
 	if vel.length() > max_speed:
 		vel = vel.normalized() * max_speed
+
+func check_bounds(minx, miny, maxx, maxy) -> bool:
+	if position.x + sprite.texture.get_size().x < 0 or position.x > maxx:
+		return false
+	if position.y + sprite.texture.get_size().y < 0 or position.y > maxy:
+		return false
+	return true
 
 func apply_friction(amount : float):
 	if vel.length() > amount:
