@@ -41,8 +41,14 @@ func _physics_process(delta):
 					player_anims.play("fly_left_slight")
 			else:
 				player_anims.play("fly_straight")
+		
 		keep_in_bounds(delta)
-		move_and_collide(vel * delta)
+		
+		var collided_with = move_and_collide(vel * delta)
+		
+		if collided_with:
+			if collided_with is Strafer:
+				pass
 		
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
 			shoot_projectile(preload("res://projectiles/OrangeProjectile.tscn").instance(), Vector2.UP * shot_speed)

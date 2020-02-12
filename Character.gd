@@ -11,6 +11,7 @@ export var max_health := 100.0
 export(Globals.Factions) var faction := Globals.Factions.NEUTRAL
 
 var vel := Vector2.ZERO
+var force_vel := Vector2.ZERO
 var last_damaged_by
 var dead := false
 var dying := false
@@ -61,11 +62,18 @@ func check_bounds(minx, miny, maxx, maxy) -> bool:
 	var in_y : bool = global_position.y + sprite.texture.get_size().y > miny and global_position.y < maxy
 	return in_x and in_y
 
+func apply_impulse():
+	pass
+
 func apply_friction(amount : float):
 	if vel.length() > amount:
 		vel -= vel.normalized() * amount
 	else:
 		vel = Vector2.ZERO
+	if force_vel.length() > amount:
+		force_vel -= force_vel.normalized() * amount
+	else:
+		force_vel = Vector2.ZERO
 
 func _on_CharacterAnimations_animation_finished(anim_name):
 	if anim_name == "die":
