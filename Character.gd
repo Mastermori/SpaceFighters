@@ -19,14 +19,14 @@ onready var health := max_health
 onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var bullet_spawn : Position2D = $BulletSpawn
 
+# to be overwritten - called when any Animation is finished
+func anim_finished(anim_name):
+	pass
+
 func _ready():
 	for node in get_children():
 		if node is AnimationPlayer:
 			node.connect("animation_finished", self, "anim_finished")
-
-# to be overwritten - called when any Animation is finished
-func anim_finished(anim_name):
-	pass
 
 func shoot_projectile(projectile : Projectile, vel : Vector2):
 	projectile.init(vel, self)
