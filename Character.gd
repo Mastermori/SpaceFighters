@@ -42,7 +42,8 @@ func take_damage(amount : float, caused_by):
 	health -= amount
 	last_damaged_by = caused_by
 	if health <= 0:
-		die()
+		if not dying:
+			die()
 	else:
 		character_anims.play("hit")
 
