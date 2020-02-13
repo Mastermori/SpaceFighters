@@ -13,6 +13,7 @@ extents = Vector2( 4.59724, 7.50863 )
 collision_layer = 4
 script = ExtResource( 1 )
 max_health = 20.0
+faction = 1
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( -0.368042, 8.36831e-14 )

@@ -9,7 +9,7 @@ export var shot_speed := 400
 export var init_delay := 1.1
 export var shoot_delay := 2
 
-export var should_shoot := true
+export var should_shoot := true setget set_shoot
 
 var on_screen := false
 var left_screen := false
@@ -42,18 +42,18 @@ func _physics_process(delta):
 	process_death()
 
 func process_movement(delta):
-	if not dying:
+	if not dying and not left_screen:
 		if on_screen:
 			move(delta)
 		else:
 			move_offscreen(delta)
 
 func process_bounds():
-	var in_bounds := check_bounds(0, 0, window_width, window_height)
+	var in_bounds := check_bounds(0, -10, window_width, window_height)
 	if not on_screen and not left_screen:
 		if in_bounds:
 			screen_entered()
-	if on_screen and not in_bounds:
+	if on_screen and not in_bounds and global_position.y > 10:
 		leave_screen()
 
 func process_death():
@@ -74,7 +74,8 @@ func shoot_at_player(predictive := false):
 
 func screen_entered():
 	on_screen = true
-	shoot_timer.start(init_delay)
+	if should_shoot:
+		shoot_timer.start(init_delay)
 	$Collider.set_deferred("disabled", false)
 	enter_screen()
 	print("Strafer entered screen")
@@ -83,11 +84,20 @@ func leave_screen():
 	on_screen = false
 	left_screen = true
 	$Collider.set_deferred("disabled", true)
+	if should_shoot:
+		should_shoot = false
 	exit_screen()
 	print("Strafer left screen")
 
 func queue_free():
 	.queue_free()
+
+func set_shoot(enabled : bool):
+	if enabled and not should_shoot and on_screen:
+		shoot_timer.start(init_delay)
+	if not enabled and should_shoot:
+		shoot_timer.stop()
+	should_shoot = enabled
 
 func _on_ShootTimer_timeout():
 	if on_screen and not dying and should_shoot:

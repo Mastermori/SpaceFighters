@@ -58,8 +58,8 @@ func apply_movement(acceleration : Vector2):
 		vel = vel.normalized() * max_speed
 
 func check_bounds(minx, miny, maxx, maxy) -> bool:
-	var in_x : bool = global_position.x + sprite.texture.get_size().x > minx and global_position.x < maxx
-	var in_y : bool = global_position.y + sprite.texture.get_size().y > miny and global_position.y < maxy
+	var in_x : bool = global_position.x + sprite.texture.get_size().x / 2 > minx and global_position.x - sprite.texture.get_size().x / 2 < maxx
+	var in_y : bool = global_position.y + sprite.texture.get_size().y / 2 > miny and global_position.y - sprite.texture.get_size().y / 2 < maxy
 	return in_x and in_y
 
 func apply_impulse():

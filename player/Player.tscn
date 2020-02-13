@@ -98,7 +98,6 @@ tracks/0/keys = {
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 acceleration = 2000
-deceleration = 3000
 max_speed = 700
 max_health = 30.0
 faction = 0

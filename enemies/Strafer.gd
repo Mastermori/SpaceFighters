@@ -10,13 +10,23 @@ var follow : PathFollow2D
 func _ready():
 	pass
 
-func enter_screen():
+func enter_screen(use_remote_transform := false):
 	if not follow:
 		follow = path_follow_scene.instance()
 		get_node(follow_path).add_child(follow)
-		get_parent().remove_child(self)
-		follow.add_child(self)
-		set_owner(follow)
+		if use_remote_transform:
+			var remote_transform := RemoteTransform2D.new()
+			remote_transform.remote_path = get_path()
+			follow.add_child(remote_transform)
+		else:
+			position = Vector2.ZERO
+			get_parent().remove_child(self)
+			follow.add_child(self)
+			set_owner(follow)
+
+func queue_free():
+	follow.queue_free()
+	.queue_free()
 
 func move(delta):
 	follow.offset += onscreen_speed * delta
