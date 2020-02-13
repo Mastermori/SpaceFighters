@@ -12,14 +12,16 @@ onready var cloud_timer := $CloudTimer
 func _ready():
 	spawn_random_cloud()
 	start_timer()
+	randomize()
 
 func start_timer():
 	cloud_timer.start(cloud_timer_min + randf() * cloud_timer_max)
 
 func spawn_random_cloud():
 	var cloud : Sprite = preload("res://clouds/Cloud.tscn").instance()
-	cloud.init(Vector2(0, cloud_speed * randf() * .2 + cloud_speed ))
-	cloud.texture = cloud_types[randi() % cloud_types.size()]
+	cloud.init(Vector2(0, cloud_speed * randf() * .1 + cloud_speed ))
+	var rand = randi() % cloud_types.size()
+	cloud.texture = cloud_types[rand]
 	cloud.position.y = -cloud.texture.get_size().y * cloud.scale.y
 	$Clouds.add_child(cloud)
 
