@@ -17,8 +17,8 @@ func _ready():
 	for i in range(amount):
 		var enemy : Enemy = construct()
 		enemy.position = offset * i + offset_step * offset_mask * i
-		print("Enemy" + str(i) + " position: " + str(enemy.global_position))
 		add_child(enemy)
+		print("Enemy" + str(i) + " position: " + str(enemy.global_position))
 
 func construct() -> Enemy:
 	return enemy_scene.instance()
