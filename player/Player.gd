@@ -6,10 +6,7 @@ export(RectangleShape2D) var keep_in_rect : RectangleShape2D
 export var shot_speed := 800.0
 export var shoot_delay := .15
 export var use_mouse_movement := false
-export var stop_distance := 20
-
-
-var lock := false
+export var move_speed := 10
 
 
 onready var resawn_timer : Timer = $RespawnTimer
@@ -19,13 +16,23 @@ onready var shoot_timer := $ShootTimer
 
 onready var spawn_position := position
 
+
 func _ready():
 	Globals.player = self
 	respawn()
 
 func _physics_process(delta):
-	if not lock:
+	if not dying:
+		var mouse_pos := get_global_mouse_position()
+		var dist = global_position - mouse_pos
 		
+		var new_pos : Vector2
+		if dist.length() > max_speed:
+			new_pos = lerp(global_position, global_position - dist.normalized() * max_speed, move_speed * delta)
+		else:
+			new_pos = lerp(global_position, mouse_pos, move_speed * delta)
+		
+		global_position = new_pos
 		
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
 			shoot_projectile(preload("res://projectiles/OrangeProjectile.tscn").instance(), Vector2.UP * shot_speed)
@@ -34,9 +41,9 @@ func _physics_process(delta):
 func keep_in_bounds(delta):
 	var spawn_dist = position - spawn_position
 	if abs(spawn_dist.x) > keep_in_rect.extents.x:
-		position.x -= sign(spawn_dist.x) * pow(abs(spawn_dist.x)-keep_in_rect.extents.x, 1.5) * delta
+		vel.x -= sign(spawn_dist.x) * pow(abs(spawn_dist.x)-keep_in_rect.extents.x, 1.5) * delta
 	if abs(spawn_dist.y) > keep_in_rect.extents.y:
-		position.y -= sign(spawn_dist.y) * pow(abs(spawn_dist.y)-keep_in_rect.extents.y, 1.5) * delta
+		vel.y -= sign(spawn_dist.y) * pow(abs(spawn_dist.y)-keep_in_rect.extents.y, 1.5) * delta
 
 func die():
 	print("player died to " + last_damaged_by.name)
@@ -47,7 +54,9 @@ func respawn():
 	character_anims.play("respawn")
 	player_anims.play("fly_straight")
 	health = max_health
-	lock = true
+	dying = false
+	dead = false
+	position = spawn_position
 	invin_timer.start()
 
 
@@ -58,5 +67,4 @@ func _on_InvincibilityTimer_timeout():
 	$Collider.set_deferred("disabled", false)
 
 func anim_finished(anim_name):
-	if anim_name == "respawn":
-		lock = false
+	pass
