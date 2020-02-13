@@ -99,7 +99,6 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 acceleration = 2000
 max_speed = 700
-max_health = 30.0
 faction = 0
 keep_in_rect = SubResource( 1 )
 

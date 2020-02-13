@@ -5,6 +5,7 @@ class_name Player
 export(RectangleShape2D) var keep_in_rect : RectangleShape2D
 export var shot_speed := 800.0
 export var shoot_delay := .15
+export var use_mouse_movement := false
 
 
 var lock := false
@@ -56,8 +57,11 @@ func _physics_process(delta):
 
 func get_move_dir() -> Vector2:
 	var dir := Vector2.ZERO
-	dir.x += Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
-	dir.y += Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
+	if use_mouse_movement:
+		dir = (get_global_mouse_position() - global_position).normalized()
+	else:
+		dir.x += Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
+		dir.y += Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
 	return dir
 
 func keep_in_bounds(delta):
