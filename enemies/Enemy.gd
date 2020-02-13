@@ -54,7 +54,7 @@ func process_bounds():
 		if in_bounds:
 			screen_entered()
 	if on_screen and not in_bounds and global_position.y > 10:
-		leave_screen()
+		screen_left()
 
 func process_death():
 	if (left_screen or dead) and bullet_spawn.get_child_count() == 0:
@@ -78,16 +78,14 @@ func screen_entered():
 		shoot_timer.start(init_delay)
 	$Collider.set_deferred("disabled", false)
 	enter_screen()
-	print("Strafer entered screen")
 
-func leave_screen():
+func screen_left():
 	on_screen = false
 	left_screen = true
 	$Collider.set_deferred("disabled", true)
 	if should_shoot:
 		should_shoot = false
 	exit_screen()
-	print("Strafer left screen")
 
 func queue_free():
 	.queue_free()
