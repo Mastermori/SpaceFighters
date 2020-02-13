@@ -96,14 +96,12 @@ tracks/0/keys = {
 [node name="Player" groups=[
 "player",
 ] instance=ExtResource( 1 )]
+position = Vector2( 0, 7.8867 )
 script = ExtResource( 2 )
 acceleration = 2000
-max_speed = 700
+max_speed = 600
 faction = 0
 keep_in_rect = SubResource( 1 )
-
-[node name="Sprite" parent="." index="0"]
-frame = 0
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="." index="5"]
 anims/fly_left = SubResource( 2 )

@@ -6,6 +6,7 @@ export(RectangleShape2D) var keep_in_rect : RectangleShape2D
 export var shot_speed := 800.0
 export var shoot_delay := .15
 export var use_mouse_movement := false
+export var stop_distance := 20
 
 
 var lock := false
@@ -25,23 +26,30 @@ func _ready():
 func _physics_process(delta):
 	if not lock:
 		var move_dir := get_move_dir()
-		if move_dir == Vector2.ZERO:
-			apply_friction(deceleration * delta)
-			player_anims.play("fly_straight")
-		else:
-			apply_movement(move_dir * acceleration * delta)
-			if move_dir.x > 0:
-				if vel.x > max_speed * .9:
-					player_anims.play("fly_right")
-				else:
-					player_anims.play("fly_right_slight")
-			elif move_dir.x < 0:
-				if vel.x < -max_speed * .9:
-					player_anims.play("fly_left")
-				else:
-					player_anims.play("fly_left_slight")
+		if use_mouse_movement:
+			if move_dir.length() > stop_distance:
+				vel = move_dir.normalized() * max_speed
 			else:
+				global_position = get_global_mouse_position()
 				player_anims.play("fly_straight")
+		else:
+			if move_dir == Vector2.ZERO:
+				apply_friction(deceleration * delta)
+				player_anims.play("fly_straight")
+			else:
+				apply_movement(move_dir * acceleration * delta)
+		if move_dir.x > 0:
+			if vel.x > max_speed * .9:
+				player_anims.play("fly_right")
+			else:
+				player_anims.play("fly_right_slight")
+		elif move_dir.x < 0:
+			if vel.x < -max_speed * .9:
+				player_anims.play("fly_left")
+			else:
+				player_anims.play("fly_left_slight")
+		else:
+			player_anims.play("fly_straight")
 		
 		keep_in_bounds(delta)
 		
@@ -58,7 +66,7 @@ func _physics_process(delta):
 func get_move_dir() -> Vector2:
 	var dir := Vector2.ZERO
 	if use_mouse_movement:
-		dir = (get_global_mouse_position() - global_position).normalized()
+		dir = (get_global_mouse_position() - global_position)
 	else:
 		dir.x += Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 		dir.y += Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
