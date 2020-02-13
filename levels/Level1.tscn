@@ -16,6 +16,10 @@ _data = {
 "level",
 ]]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+cloud_timer_max = 8.0
 cloud_types = [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
 [node name="Background" type="TextureRect" parent="."]
@@ -24,10 +28,14 @@ margin_bottom = 1080.0
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Clouds" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CloudTimer" type="Timer" parent="."]
 
@@ -35,13 +43,25 @@ __meta__ = {
 position = Vector2( 607, 0 )
 scale = Vector2( -1, 1 )
 curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RightStrafes" type="Path2D" parent="."]
 curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Objects" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Enemies" type="YSort" parent="Objects"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="StraferGroup" parent="Objects/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 428.309, -169.211 )
@@ -95,5 +115,6 @@ follow_path = NodePath("../../../RightStrafes")
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( 303.5, 600 )
+max_speed = 75
 use_mouse_movement = true
 [connection signal="timeout" from="CloudTimer" to="." method="_on_CloudTimer_timeout"]
