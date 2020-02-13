@@ -63,6 +63,36 @@ position = Vector2( 229.611, -465.31 )
 offset = Vector2( 0, 20 )
 follow_path = NodePath("../../../RightStrafes")
 
+[node name="StraferGroup6" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 424.51, -628.164 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../LeftStrafes")
+
+[node name="StraferGroup5" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 227.76, -628.164 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../RightStrafes")
+
+[node name="StraferGroup8" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 424.51, -800.271 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../LeftStrafes")
+
+[node name="StraferGroup7" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 227.76, -800.271 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../RightStrafes")
+
+[node name="StraferGroup10" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 420.809, -963.126 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../LeftStrafes")
+
+[node name="StraferGroup9" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 224.059, -963.126 )
+offset = Vector2( 0, 20 )
+follow_path = NodePath("../../../RightStrafes")
+
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( 303.5, 600 )
 use_mouse_movement = true
