@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://menus/buttons/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menus/TitleScreen.gd" type="Script" id=3]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,6 +62,8 @@ margin_bottom = 399.0
 
 [node name="Label" parent="Menu/HBoxContainer/Buttons/ExitButton" index="0"]
 text = "Exit"
+[connection signal="pressed" from="Menu/HBoxContainer/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
 
 [editable path="Menu/HBoxContainer/Buttons/StartButton"]
 
