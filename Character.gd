@@ -18,13 +18,13 @@ var dying := false
 onready var health := max_health
 
 onready var character_anims : AnimationPlayer = $CharacterAnimations
-onready var bullet_spawn : Position2D = $BulletSpawn
 onready var sprite : Sprite = $Sprite
+onready var bullet_spawns : Node2D = $BulletSpawns
 onready var window_width : int = ProjectSettings.get("display/window/size/width")
 onready var window_height : int = ProjectSettings.get("display/window/size/height")
 
 # to be overwritten - called when any Animation is finished
-func anim_finished(anim_name):
+func anim_finished(_anim_name):
 	pass
 
 func _ready():
@@ -32,7 +32,8 @@ func _ready():
 		if node is AnimationPlayer:
 			node.connect("animation_finished", self, "anim_finished")
 
-func shoot_projectile(projectile : Projectile, vel : Vector2):
+# warning-ignore:shadowed_variable
+func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Position2D = bullet_spawns.get_children()[0]):
 	projectile.init(vel, self)
 	projectile.set_as_toplevel(true)
 	projectile.global_position = bullet_spawn.global_position
@@ -53,6 +54,7 @@ func die():
 	$Collider.set_deferred("disabled", true)
 	emit_signal("died", last_damaged_by)
 
+# warning-ignore:shadowed_variable
 func apply_movement(acceleration : Vector2):
 	vel += acceleration
 	if vel.length() > max_speed:
