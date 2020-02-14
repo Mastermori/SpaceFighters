@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://projectiles/Projectile.gd"
 }, {
 "base": "Enemy",
+"class": "Scout",
+"language": "GDScript",
+"path": "res://enemies/Scout.gd"
+}, {
+"base": "Enemy",
 "class": "Strafer",
 "language": "GDScript",
 "path": "res://enemies/Strafer.gd"
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "EnemyGroup": "",
 "Player": "",
 "Projectile": "",
+"Scout": "",
 "Strafer": "",
 "StraferGroup": ""
 }

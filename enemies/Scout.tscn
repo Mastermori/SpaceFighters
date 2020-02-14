@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/ships/enemy-big.png" type="Texture" id=2]
+[ext_resource path="res://enemies/Scout.gd" type="Script" id=3]
+
+[node name="Scout" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+max_health = 25.0
+onscreen_speed = 150.0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="ExplosionSprite" parent="." index="1"]
+scale = Vector2( 5, 5 )
+
+[node name="BulletSpawn" parent="BulletSpawns" index="0"]
+position = Vector2( 40, 0 )
