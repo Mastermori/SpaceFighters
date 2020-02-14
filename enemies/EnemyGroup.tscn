@@ -13,7 +13,7 @@ margin_top = -16.4044
 margin_right = 1.776
 margin_bottom = -2.40439
 rect_scale = Vector2( 2, 2 )
-text = "Custom Group"
+text = "Enemy Group"
 __meta__ = {
 "_edit_use_anchors_": false
 }
