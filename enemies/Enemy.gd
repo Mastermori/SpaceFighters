@@ -57,19 +57,24 @@ func process_bounds():
 		screen_left()
 
 func process_death():
-	if (left_screen or dead) and bullet_spawn.get_child_count() == 0:
+	if (left_screen or dead) and no_bullets():
 		queue_free()
 
+func no_bullets() -> bool:
+	for spawn in bullet_spawns.get_children():
+		if not spawn.get_child_count() == 0:
+			return false
+	return true
 
 func move_offscreen(delta):
 	position.y += offscreen_speed * delta
 
-func shoot_at(global_pos : Vector2):
+func shoot_at(global_pos : Vector2, projectile : Projectile):
 	var dir = (global_pos - global_position).normalized()
-	shoot_projectile(preload("res://projectiles/PinkProjectile.tscn").instance(), dir * shot_speed)
+	shoot_projectile(projectile, dir * shot_speed)
 
-func shoot_at_player(predictive := false):
-	shoot_at(Globals.player.get_node("Collider").global_position + (Globals.player.vel if predictive else Vector2.ZERO))
+func shoot_at_player(projectile : Projectile):
+	shoot_at(Globals.player.get_node("Collider").global_position, projectile)
 
 
 func screen_entered():

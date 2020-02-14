@@ -32,4 +32,4 @@ func move(delta):
 	follow.offset += onscreen_speed * delta
 
 func shoot():
-	shoot_at_player()
+	shoot_at_player(preload("res://projectiles/PinkProjectile.tscn").instance())
