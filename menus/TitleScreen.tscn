@@ -4,7 +4,6 @@
 [ext_resource path="res://menus/buttons/MenuButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://menus/TitleScreen.gd" type="Script" id=3]
 
-
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

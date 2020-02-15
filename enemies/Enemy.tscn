@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Character.tscn" type="PackedScene" id=2]
@@ -6,6 +6,24 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.59724, 7.50863 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "fly"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [node name="Enemy" groups=[
 "enemy",
@@ -38,4 +56,7 @@ disabled = true
 position = Vector2( 25, 0 )
 
 [node name="ShootTimer" type="Timer" parent="." index="5"]
+
+[node name="EnemyAnimations" type="AnimationPlayer" parent="." index="6"]
+anims/fly = SubResource( 2 )
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

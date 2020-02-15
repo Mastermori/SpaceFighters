@@ -15,6 +15,7 @@ var on_screen := false
 var left_screen := false
 
 onready var shoot_timer := $ShootTimer
+onready var enemy_anims : AnimationPlayer = $EnemyAnimations
 
 # to be overwritten - used to move the enemy while on screen - called each process
 func move(_delta):
@@ -35,6 +36,7 @@ func exit_screen():
 
 func _ready():
 	shoot_timer.wait_time = shoot_delay
+	enemy_anims.play("fly")
 
 func _physics_process(delta):
 	process_bounds()
