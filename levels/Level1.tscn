@@ -6,8 +6,8 @@
 [ext_resource path="res://art/backgrounds/clouds.png" type="Texture" id=4]
 [ext_resource path="res://art/backgrounds/clouds-transparent.png" type="Texture" id=5]
 [ext_resource path="res://enemies/Scout.tscn" type="PackedScene" id=6]
-[ext_resource path="res://enemies/StraferGroup.tscn" type="PackedScene" id=7]
-[ext_resource path="res://enemies/CustomGroup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemies/groups/StraferGroup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemies/groups/CustomGroup.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -41,12 +41,14 @@ __meta__ = {
 
 [node name="CloudTimer" type="Timer" parent="."]
 
-[node name="LeftStrafes" type="Path2D" parent="."]
+[node name="StrafePaths" type="Node2D" parent="."]
+
+[node name="LeftStrafes" type="Path2D" parent="StrafePaths"]
 curve = SubResource( 1 )
 
-[node name="RightStrafes" type="Path2D" parent="."]
+[node name="RightStrafes" type="Path2D" parent="StrafePaths"]
 position = Vector2( 607, 0 )
-rotation = -3.14159
+rotation = 3.14159
 scale = Vector2( 1, -1 )
 curve = SubResource( 1 )
 __meta__ = {
@@ -58,75 +60,79 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Player" parent="Objects" instance=ExtResource( 1 )]
+position = Vector2( 303.5, 600 )
+max_speed = 75
+use_mouse_movement = true
+
 [node name="Enemies" type="YSort" parent="Objects"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StraferGroup" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="Strafer" type="YSort" parent="Objects/Enemies"]
+
+[node name="StraferGroup" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 428.309, -169.211 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
-[node name="StraferGroup2" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup2" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 231.559, -286.092 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
-[node name="StraferGroup3" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup3" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 426.361, -465.31 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
-[node name="StraferGroup4" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup4" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 229.611, -465.31 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
-[node name="StraferGroup6" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup6" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 424.51, -628.164 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
-[node name="StraferGroup5" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup5" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 227.76, -628.164 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
-[node name="StraferGroup8" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup8" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 424.51, -800.271 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
-[node name="StraferGroup7" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup7" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 227.76, -800.271 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
-[node name="StraferGroup10" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup10" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 420.809, -963.126 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
-[node name="StraferGroup9" parent="Objects/Enemies" instance=ExtResource( 7 )]
+[node name="StraferGroup9" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 224.059, -963.126 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
-[node name="CustomGroup" parent="Objects/Enemies" instance=ExtResource( 8 )]
+[node name="Scouts" type="YSort" parent="Objects/Enemies"]
+
+[node name="CustomGroup" parent="Objects/Enemies/Scouts" instance=ExtResource( 8 )]
 position = Vector2( 182.841, -158.228 )
 enemy_scene = ExtResource( 6 )
-offset = Vector2( 50, 40 )
+offset = Vector2( 100, -75 )
 custom_rotation = 90
 
-[node name="Scout" parent="Objects/Enemies/CustomGroup" instance=ExtResource( 6 )]
+[node name="Scout" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
 
-[node name="Scout2" parent="Objects/Enemies/CustomGroup" instance=ExtResource( 6 )]
+[node name="Scout2" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
 
-[node name="Scout3" parent="Objects/Enemies/CustomGroup" instance=ExtResource( 6 )]
-
-[node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 303.5, 600 )
-max_speed = 75
-use_mouse_movement = true
+[node name="Scout3" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
 [connection signal="timeout" from="CloudTimer" to="." method="_on_CloudTimer_timeout"]

@@ -23,11 +23,6 @@ func shoot():
 #	shoot_at_player(preload("res://projectiles/PinkProjectile.tscn").instance())
 	shoot_projectile(preload("res://projectiles/LaserProjectile.tscn").instance(), Vector2.DOWN * shot_speed)
 
-func anim_finished(anim_name):
-	if anim_name == "fly":
-		print("fly finished")
-	.anim_finished(anim_name)
-
 
 func _on_MoveTimer_timeout():
 	vel = Vector2.DOWN
