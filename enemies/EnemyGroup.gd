@@ -19,7 +19,8 @@ func _ready():
 		var enemy = construct(i)
 		enemy.position = offset * i + offset_step * offset_mask * i
 		enemy.rotation_degrees = custom_rotation
-		add_child(enemy)
+		if not enemy in get_children():
+			add_child(enemy)
 
 func pre_construct():
 	pass
