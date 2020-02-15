@@ -29,8 +29,19 @@ func _physics_process(delta):
 		var new_pos : Vector2
 		if dist.length() > max_speed:
 			new_pos = lerp(global_position, global_position - dist.normalized() * max_speed, move_speed * delta)
+			if dist.x > 0:
+				player_anims.play("fly_left_slight")
+			else:
+				player_anims.play("fly_right_slight")
 		else:
 			new_pos = lerp(global_position, mouse_pos, move_speed * delta)
+			if dist.length() > max_speed * .4:
+				if dist.x > 0:
+					player_anims.play("fly_left_slight")
+				else:
+					player_anims.play("fly_right_slight")
+			else:
+				player_anims.play("fly_straight")
 		
 		global_position = new_pos
 		
