@@ -2,7 +2,7 @@ extends Area2D
 
 class_name Projectile
 
-signal hit(enemy)
+signal hit(body)
 
 export var damage := 10.0
 

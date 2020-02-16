@@ -34,6 +34,10 @@ onready var window_height : int = ProjectSettings.get("display/window/size/heigh
 func anim_finished(_anim_name):
 	pass
 
+# to be overwritten - called when a projectile shot by this character hits something
+func projectile_hit(body : KinematicBody2D):
+	pass
+
 func _ready():
 	for node in get_children():
 		if node is AnimationPlayer:
@@ -46,6 +50,7 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Pos
 	projectile.damage *= bullet_damage_scale
 	projectile.set_as_toplevel(true)
 	projectile.global_position = bullet_spawn.global_position
+	projectile.connect("hit", self, "projectile_hit")
 	bullet_spawn.add_child(projectile)
 
 func take_damage(amount : float, caused_by):
