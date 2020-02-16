@@ -5,11 +5,10 @@
 [ext_resource path="res://enemies/groups/scripts/StraferGroup.gd" type="Script" id=3]
 [ext_resource path="res://art/ships/enemy-small.png" type="Texture" id=4]
 
-
-
 [node name="StraferGroup" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 enemy_scene = ExtResource( 2 )
+offset = Vector2( 0, -20 )
 
 [node name="Sprite" type="Sprite" parent="EditorDisplay" index="0"]
 scale = Vector2( 2.5, 2.5 )

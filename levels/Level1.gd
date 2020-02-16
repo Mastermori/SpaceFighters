@@ -1,4 +1,4 @@
-extends Node2D
+extends Level
 
 export var cloud_timer_min := 3.0
 export var cloud_timer_max := 12.0

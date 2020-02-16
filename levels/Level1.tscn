@@ -43,10 +43,10 @@ __meta__ = {
 
 [node name="StrafePaths" type="Node2D" parent="."]
 
-[node name="LeftStrafes" type="Path2D" parent="StrafePaths"]
+[node name="Left" type="Path2D" parent="StrafePaths"]
 curve = SubResource( 1 )
 
-[node name="RightStrafes" type="Path2D" parent="StrafePaths"]
+[node name="Right" type="Path2D" parent="StrafePaths"]
 position = Vector2( 607, 0 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
