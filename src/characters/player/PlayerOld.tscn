@@ -1,8 +1,9 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://assets/art/ships/ship.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/ships/player_ship.png" type="Texture" id=1]
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/effects/explosion.png" type="Texture" id=3]
+
 
 
 

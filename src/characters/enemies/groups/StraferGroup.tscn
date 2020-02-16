@@ -5,9 +5,6 @@
 [ext_resource path="res://src/characters/enemies/groups/scripts/StraferGroup.gd" type="Script" id=3]
 [ext_resource path="res://assets/art/ships/enemy-small.png" type="Texture" id=4]
 
-
-
-
 [node name="StraferGroup" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 enemy_scene = ExtResource( 2 )
