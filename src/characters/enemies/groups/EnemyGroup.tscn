@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/characters/enemies/groups/scripts/EnemyGroup.gd" type="Script" id=1]
+
+
+
+[node name="EnemyGroup" type="YSort" groups=[
+"enemy_group",
+]]
+script = ExtResource( 1 )
+
+[node name="EditorDisplay" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="EditorDisplay"]
+margin_left = -90.224
+margin_top = -16.4044
+margin_right = 1.776
+margin_bottom = -2.40439
+rect_scale = Vector2( 2, 2 )
+text = "Enemy Group"
+__meta__ = {
+"_edit_use_anchors_": false
+}

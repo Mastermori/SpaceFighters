@@ -12,52 +12,52 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Character.gd"
+"path": "res://src/characters/Character.gd"
 }, {
 "base": "Character",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://enemies/scripts/Enemy.gd"
+"path": "res://src/characters/enemies/scripts/Enemy.gd"
 }, {
 "base": "YSort",
 "class": "EnemyGroup",
 "language": "GDScript",
-"path": "res://enemies/groups/scripts/EnemyGroup.gd"
+"path": "res://src/characters/enemies/groups/scripts/EnemyGroup.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
-"path": "res://levels/Level.gd"
+"path": "res://src/levels/scripts/Level.gd"
 }, {
 "base": "Character",
 "class": "Player",
 "language": "GDScript",
-"path": "res://player/Player.gd"
+"path": "res://src/characters/player/Player.gd"
 }, {
 "base": "Area2D",
 "class": "PowerUp",
 "language": "GDScript",
-"path": "res://power-ups/PowerUp.gd"
+"path": "res://src/power-ups/scripts/PowerUp.gd"
 }, {
 "base": "Area2D",
 "class": "Projectile",
 "language": "GDScript",
-"path": "res://projectiles/Projectile.gd"
+"path": "res://src/projectiles/scripts/Projectile.gd"
 }, {
 "base": "Enemy",
 "class": "Scout",
 "language": "GDScript",
-"path": "res://enemies/scripts/Scout.gd"
+"path": "res://src/characters/enemies/scripts/Scout.gd"
 }, {
 "base": "Enemy",
 "class": "Strafer",
 "language": "GDScript",
-"path": "res://enemies/scripts/Strafer.gd"
+"path": "res://src/characters/enemies/scripts/Strafer.gd"
 }, {
 "base": "EnemyGroup",
 "class": "StraferGroup",
 "language": "GDScript",
-"path": "res://enemies/groups/scripts/StraferGroup.gd"
+"path": "res://src/characters/enemies/groups/scripts/StraferGroup.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -75,12 +75,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Space Fighters"
-run/main_scene="res://menus/TitleScreen.tscn"
+run/main_scene="res://src/menus/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Globals.gd"
+Globals="*res://src/Globals.gd"
 
 [display]
 
