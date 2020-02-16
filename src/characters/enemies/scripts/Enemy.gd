@@ -70,10 +70,6 @@ func no_bullets() -> bool:
 func move_offscreen(delta):
 	position.y += offscreen_speed * delta
 
-func shoot_at(global_pos : Vector2, projectile : Projectile):
-	var dir = (global_pos - global_position).normalized()
-	shoot_projectile(projectile, dir * shot_speed)
-
 func shoot_at_player(projectile : Projectile):
 	shoot_at(Globals.player.get_node("Collider").global_position, projectile)
 

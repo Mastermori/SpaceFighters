@@ -53,6 +53,10 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Pos
 	projectile.connect("hit", self, "projectile_hit")
 	bullet_spawn.add_child(projectile)
 
+func shoot_at(global_pos : Vector2, projectile : Projectile):
+	var dir = (global_pos - global_position).normalized()
+	shoot_projectile(projectile, dir * shot_speed)
+
 func take_damage(amount : float, caused_by):
 	health -= amount
 	last_damaged_by = caused_by
