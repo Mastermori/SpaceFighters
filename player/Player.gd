@@ -39,7 +39,7 @@ func _physics_process(delta):
 					player_anims.play("fly_right_slight")
 			else:
 				player_anims.play("fly_straight")
-		
+		new_pos.x = clamp(new_pos.x, 0, window_width)
 		global_position = new_pos
 		
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
