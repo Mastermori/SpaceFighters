@@ -7,15 +7,16 @@ enum Factions {
 }
 
 var player : KinematicBody2D
-var level : Level
+var level : Level setget set_level
+var level_objects : YSort
 
-func set_level(l : Node):
-	level = l
+func change_level(l : Node):
+	set_level(l)
 	change_scene(l, false)
 
 func find_level(level_name : String):
 	var level_inst = load("res://src/levels/" + level_name + ".tscn").instance()
-	set_level(level_inst)
+	change_level(level_inst)
 
 func change_scene(new_scene : Node, clear_level := true):
 	var root = get_tree().get_root()
@@ -28,3 +29,8 @@ func change_scene(new_scene : Node, clear_level := true):
 	# Optional, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(new_scene)
 
+
+func set_level(l : Level):
+	print("set level")
+	level = l
+	level_objects = l.get_node("Objects")
