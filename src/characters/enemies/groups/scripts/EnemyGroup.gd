@@ -1,3 +1,5 @@
+tool
+
 extends YSort
 
 class_name EnemyGroup
@@ -10,13 +12,18 @@ export var offset := Vector2.ZERO
 export var custom_rotation := 0
 
 func _ready():
-	if global_position.y >= 0:
-		print("ERROR: Enemy groups must be located above the level")
-	if has_node("EditorDisplay"):
-		remove_child(get_node("EditorDisplay"))
-	pre_construct()
-	if not get_parent().is_in_group("enemy_group"):
-		construct_group()
+	if Engine.editor_hint:
+		if get_parent().is_in_group("enemy_group"):
+			visible = false
+	else:
+		visible = true
+		if global_position.y >= 0:
+			print("ERROR: Enemy groups must be located above the level")
+		if has_node("EditorDisplay"):
+			remove_child(get_node("EditorDisplay"))
+		pre_construct()
+		if not get_parent().is_in_group("enemy_group"):
+			construct_group()
 
 func construct_group():
 	for i in range(amount):
