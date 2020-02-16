@@ -112,7 +112,8 @@ func add_power_up(name : String, var_names : Array, values : Array, time : float
 		print("Tried to add power up with uneven vars and vals to " + self.name)
 		return
 	if power_ups.has(name):
-		power_ups[2].start()
+		power_ups[name][2].start()
+		return
 	for i in range(var_names.size()):
 		var var_name : String = var_names[i]
 		var value = values[i]
@@ -135,7 +136,6 @@ func remove_power_up(name):
 	power_up[2].stop()
 	power_up[2].queue_free()
 	power_ups.erase(name)
-	print("removed power-up: " + name)
 
 
 func _on_CharacterAnimations_animation_finished(anim_name):
