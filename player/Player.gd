@@ -3,9 +3,6 @@ extends Character
 class_name Player
 
 export(RectangleShape2D) var keep_in_rect : RectangleShape2D
-export var shot_speed := 800.0
-export var shoot_delay := .15
-export var use_mouse_movement := false
 export var move_speed := 10
 
 

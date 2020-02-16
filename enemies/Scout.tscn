@@ -28,14 +28,14 @@ onscreen_speed = 500.0
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
 
-[node name="ExplosionSprite" parent="." index="1"]
+[node name="ExplosionSprite" parent="." index="2"]
 scale = Vector2( 5, 5 )
-
-[node name="BulletSpawn" parent="BulletSpawns" index="0"]
-position = Vector2( 40, 0 )
 
 [node name="EnemyAnimations" parent="." index="6"]
 anims/fly = SubResource( 1 )
 
 [node name="MoveTimer" type="Timer" parent="." index="7"]
+
+[node name="BulletSpawn" parent="BulletSpawns" index="0"]
+position = Vector2( 40, 0 )
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

@@ -3,12 +3,17 @@ extends KinematicBody2D
 class_name Character
 
 signal died(killer)
+signal health_changed(health, last_health, max_health)
 
 export var acceleration := 1500
 export var deceleration := 3000
 export var max_speed := 500
 export var max_health := 100.0
 export(Globals.Factions) var faction := Globals.Factions.NEUTRAL
+export var shot_speed := 800.0
+export var shoot_delay := .15
+export var bullet_size := Vector2.ONE setget set_bullet_size
+export var bullet_damage_scale := 1.0 setget set_bullet_damage_scale
 
 var vel := Vector2.ZERO
 var force_vel := Vector2.ZERO
@@ -16,6 +21,8 @@ var last_damaged_by
 var dead := false
 var dying := false
 onready var health := max_health
+
+var power_ups := {}
 
 onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var sprite : Sprite = $Sprite
@@ -35,6 +42,8 @@ func _ready():
 # warning-ignore:shadowed_variable
 func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Position2D = bullet_spawns.get_children()[0]):
 	projectile.init(vel, self)
+	projectile.scale *= bullet_size
+	projectile.damage *= bullet_damage_scale
 	projectile.set_as_toplevel(true)
 	projectile.global_position = bullet_spawn.global_position
 	bullet_spawn.add_child(projectile)
@@ -42,6 +51,7 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Pos
 func take_damage(amount : float, caused_by):
 	health -= amount
 	last_damaged_by = caused_by
+	emit_signal("health_changed", health, health + amount, max_health)
 	if health <= 0:
 		if not dying:
 			die()
@@ -77,6 +87,47 @@ func apply_friction(amount : float):
 		force_vel -= force_vel.normalized() * amount
 	else:
 		force_vel = Vector2.ZERO
+
+func set_bullet_size(size : Vector2):
+	bullet_size = size
+
+func set_bullet_damage_scale(damage_scale : float):
+	bullet_damage_scale = damage_scale
+
+func set_later(var_name : String, val, time : float):
+	yield(get_tree().create_timer(time), "timeout")
+	set(var_name, val)
+
+func add_power_up(name : String, var_names : Array, values : Array, time : float):
+	if not var_names.size() == values.size():
+		print("Tried to add power up with uneven vars and vals to " + self.name)
+		return
+	if power_ups.has(name):
+		power_ups[2].start()
+	for i in range(var_names.size()):
+		var var_name : String = var_names[i]
+		var value = values[i]
+		set(var_name, get(var_name) + value)
+	var timer := Timer.new()
+	timer.name = name + "Timer"
+	timer.wait_time = time
+	timer.one_shot = false
+	add_child(timer)
+	timer.connect("timeout", self, "remove_power_up", [name])
+	timer.start()
+	power_ups[name] = [var_names, values, timer]
+
+func remove_power_up(name):
+	var power_up = power_ups[name]
+	for i in range(power_up[0].size()):
+		var var_name : String = power_up[0][i]
+		var value = power_up[1][i]
+		set(var_name, get(var_name) - value)
+	power_up[2].stop()
+	power_up[2].queue_free()
+	power_ups.erase(name)
+	print("removed power-up: " + name)
+
 
 func _on_CharacterAnimations_animation_finished(anim_name):
 	if anim_name == "die":

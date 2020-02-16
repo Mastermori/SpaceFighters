@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://art/backgrounds/desert-backgorund.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://enemies/Scout.tscn" type="PackedScene" id=6]
 [ext_resource path="res://enemies/groups/StraferGroup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://enemies/groups/CustomGroup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://power-ups/BiggerBullets.tscn" type="PackedScene" id=9]
+[ext_resource path="res://enemies/groups/EnemyGroup.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -61,9 +63,11 @@ __meta__ = {
 }
 
 [node name="Player" parent="Objects" instance=ExtResource( 1 )]
-position = Vector2( 303.5, 600 )
+position = Vector2( 311.019, 685.792 )
 max_speed = 75
-use_mouse_movement = true
+
+[node name="BiggerBullets" parent="Objects" instance=ExtResource( 9 )]
+position = Vector2( 296.707, 436.334 )
 
 [node name="Enemies" type="YSort" parent="Objects"]
 __meta__ = {
@@ -75,64 +79,61 @@ __meta__ = {
 [node name="StraferGroup" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 428.309, -169.211 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
 [node name="StraferGroup2" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
-position = Vector2( 231.559, -286.092 )
+position = Vector2( 231.559, -288.881 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
 [node name="StraferGroup3" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 426.361, -465.31 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/RightStrafes")
 
 [node name="StraferGroup4" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 229.611, -465.31 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
 
 [node name="StraferGroup6" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 424.51, -628.164 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/Right")
 
 [node name="StraferGroup5" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 227.76, -628.164 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/Left")
 
 [node name="StraferGroup8" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 424.51, -800.271 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/Right")
 
 [node name="StraferGroup7" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 227.76, -800.271 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/Left")
 
 [node name="StraferGroup10" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 420.809, -963.126 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/RightStrafes")
+follow_path = NodePath("../../../../StrafePaths/Right")
 
 [node name="StraferGroup9" parent="Objects/Enemies/Strafer" instance=ExtResource( 7 )]
 position = Vector2( 224.059, -963.126 )
 offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/LeftStrafes")
+follow_path = NodePath("../../../../StrafePaths/Left")
 
 [node name="Scouts" type="YSort" parent="Objects/Enemies"]
 
-[node name="CustomGroup" parent="Objects/Enemies/Scouts" instance=ExtResource( 8 )]
-position = Vector2( 182.841, -158.228 )
+[node name="CustomGroup1" parent="Objects/Enemies/Scouts" instance=ExtResource( 8 )]
+position = Vector2( 101.047, -165.044 )
+amount = 2
+offset = Vector2( 200, -150 )
+
+[node name="CustomGroup2" parent="Objects/Enemies/Scouts/CustomGroup1" instance=ExtResource( 8 )]
+offset = Vector2( 0, -300 )
+
+[node name="EnemyGroup" parent="Objects/Enemies/Scouts/CustomGroup1/CustomGroup2" instance=ExtResource( 10 )]
 enemy_scene = ExtResource( 6 )
 offset = Vector2( 100, -75 )
 custom_rotation = 90
-
-[node name="Scout" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
-
-[node name="Scout2" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
-
-[node name="Scout3" parent="Objects/Enemies/Scouts/CustomGroup" instance=ExtResource( 6 )]
 [connection signal="timeout" from="CloudTimer" to="." method="_on_CloudTimer_timeout"]

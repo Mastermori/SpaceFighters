@@ -104,7 +104,7 @@ faction = 0
 keep_in_rect = SubResource( 1 )
 
 [node name="Sprite" parent="." index="0"]
-frame = 0
+frame = 5
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="." index="5"]
 anims/fly_left = SubResource( 2 )

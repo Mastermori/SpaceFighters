@@ -2,12 +2,12 @@ extends Character
 
 class_name Enemy
 
+export var points := 10
+
 export var onscreen_speed := 250.0
 export var offscreen_speed := 50
 
-export var shot_speed := 400
-export var init_delay := 1.1
-export var shoot_delay := 2
+export var first_shot_delay := 1.1
 
 export var should_shoot := true setget set_shoot
 
@@ -32,7 +32,6 @@ func enter_screen():
 # to be overwritten - called when the enemy is exited the screen
 func exit_screen():
 	pass
-
 
 func _ready():
 	shoot_timer.wait_time = shoot_delay
@@ -82,7 +81,7 @@ func shoot_at_player(projectile : Projectile):
 func screen_entered():
 	on_screen = true
 	if should_shoot:
-		shoot_timer.start(init_delay)
+		shoot_timer.start(first_shot_delay)
 	$Collider.set_deferred("disabled", false)
 	enter_screen()
 
@@ -99,7 +98,7 @@ func queue_free():
 
 func set_shoot(enabled : bool):
 	if enabled and not should_shoot and on_screen:
-		shoot_timer.start(init_delay)
+		shoot_timer.start(first_shot_delay)
 	if not enabled and should_shoot:
 		shoot_timer.stop()
 	should_shoot = enabled
