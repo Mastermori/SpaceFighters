@@ -4,10 +4,6 @@
 [ext_resource path="res://src/characters/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/art/ships/enemy-small.png" type="Texture" id=3]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.59724, 7.50863 )
 
@@ -64,4 +60,5 @@ anims/fly = SubResource( 2 )
 
 [node name="BulletSpawn" parent="BulletSpawns" index="0"]
 position = Vector2( 25, 0 )
+[connection signal="died" from="." to="." method="_on_Enemy_died"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

@@ -11,6 +11,9 @@ export var first_shot_delay := 1.1
 
 export var should_shoot := true setget set_shoot
 
+export(Array, PackedScene) var power_up_drops := [preload("res://src/power-ups/BiggerBullets.tscn")]
+export(Array, float) var power_up_chances := [.1]
+
 var on_screen := false
 var left_screen := false
 
@@ -73,6 +76,19 @@ func move_offscreen(delta):
 func shoot_at_player(projectile : Projectile):
 	shoot_at(Globals.player.get_node("Collider").global_position, projectile)
 
+func drop_random_power_up(chance_factor : float):
+	var drops := []
+	for i in range(power_up_drops.size()):
+		if randf() <= power_up_chances[i]:
+			drops.append(power_up_drops[i])
+	if drops.size() > 0:
+		drop_power_up(drops[randi() % drops.size()])
+
+func drop_power_up(power_up : PackedScene):
+	var drop : Area2D = power_up.instance()
+	drop.global_position = global_position
+	Globals.level_objects.add_child(drop)
+
 
 func screen_entered():
 	on_screen = true
@@ -99,6 +115,11 @@ func set_shoot(enabled : bool):
 		shoot_timer.stop()
 	should_shoot = enabled
 
+
 func _on_ShootTimer_timeout():
 	if on_screen and not dying and should_shoot:
 		shoot()
+
+func _on_Enemy_died(killer : Node2D):
+	if killer.is_in_group("player"):
+		drop_random_power_up(1)
