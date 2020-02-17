@@ -27,8 +27,8 @@ func get_sounds_from_dir(name : String, path := "res://assets/sounds/") -> Array
 		dir.list_dir_begin(true)
 		var file_name = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with("wav"):
-				sounds_from_dir.append(load(path + file_name))
+			if not dir.current_is_dir() and file_name.ends_with("wav.import"):
+				sounds_from_dir.append(load(path + file_name.replace(".import", "")))
 			file_name = dir.get_next()
 		return sounds_from_dir
 	else:
