@@ -50,21 +50,31 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="StartButton" parent="Menu/HBoxContainer/Buttons" instance=ExtResource( 2 )]
-margin_top = 255.0
-margin_bottom = 325.0
+margin_top = 218.0
+margin_bottom = 288.0
 
 [node name="Label" parent="Menu/HBoxContainer/Buttons/StartButton" index="0"]
 text = "Start"
 
+[node name="TestButton" parent="Menu/HBoxContainer/Buttons" instance=ExtResource( 2 )]
+margin_top = 292.0
+margin_bottom = 362.0
+
+[node name="Label" parent="Menu/HBoxContainer/Buttons/TestButton" index="0"]
+text = "Test"
+
 [node name="ExitButton" parent="Menu/HBoxContainer/Buttons" instance=ExtResource( 2 )]
-margin_top = 329.0
-margin_bottom = 399.0
+margin_top = 366.0
+margin_bottom = 436.0
 
 [node name="Label" parent="Menu/HBoxContainer/Buttons/ExitButton" index="0"]
 text = "Exit"
 [connection signal="pressed" from="Menu/HBoxContainer/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/Buttons/TestButton" to="." method="_on_TestButton_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
 
 [editable path="Menu/HBoxContainer/Buttons/StartButton"]
+
+[editable path="Menu/HBoxContainer/Buttons/TestButton"]
 
 [editable path="Menu/HBoxContainer/Buttons/ExitButton"]
