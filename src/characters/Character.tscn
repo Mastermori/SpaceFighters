@@ -3,9 +3,6 @@
 [ext_resource path="res://src/characters/Character.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/effects/explosion.png" type="Texture" id=2]
 
-
-
-
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ship.png-9f7dcac29f4b016ca46abac3a8dd91e5.stex"
 
@@ -157,6 +154,7 @@ tracks/1/keys = {
 
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 1 )
+shot_sound_varient = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2.5, 2.5 )

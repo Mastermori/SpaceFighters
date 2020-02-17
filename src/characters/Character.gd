@@ -7,13 +7,18 @@ signal health_changed(health, last_health, max_health)
 
 export var acceleration := 1500
 export var deceleration := 3000
+
 export var max_speed := 500
 export var max_health := 100.0
+
 export(Globals.Factions) var faction := Globals.Factions.NEUTRAL
+
 export var shot_speed := 800.0
 export var shoot_delay := .15
 export var bullet_size := Vector2.ONE setget set_bullet_size
 export var bullet_damage_scale := 1.0 setget set_bullet_damage_scale
+
+export var shot_sound_varient := 0
 
 var vel := Vector2.ZERO
 var force_vel := Vector2.ZERO
@@ -52,6 +57,7 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Pos
 	projectile.global_position = bullet_spawn.global_position
 	projectile.connect("hit", self, "projectile_hit")
 	bullet_spawn.add_child(projectile)
+	Globals.play_sound("shoot", shot_sound_varient, self, false, -40, randf() / 2 + .75 - bullet_size.x / 4)
 
 func shoot_at(global_pos : Vector2, projectile : Projectile):
 	var dir = (global_pos - global_position).normalized()
@@ -71,6 +77,7 @@ func die():
 	dying = true
 	character_anims.play("die")
 	$Collider.set_deferred("disabled", true)
+	Globals.play_random_sound("explosion", self, true, -20, randf() / 5 + .9)
 	emit_signal("died", last_damaged_by)
 
 # warning-ignore:shadowed_variable

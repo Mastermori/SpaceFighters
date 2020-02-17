@@ -102,6 +102,7 @@ script = ExtResource( 2 )
 acceleration = 2000
 max_speed = 600
 faction = 0
+shot_sound_varient = 0
 keep_in_rect = SubResource( 1 )
 
 [node name="Sprite" parent="." index="0"]
