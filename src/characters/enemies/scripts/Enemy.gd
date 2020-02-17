@@ -87,7 +87,7 @@ func drop_random_power_up(chance_factor : float):
 func drop_power_up(power_up : PackedScene):
 	var drop : Area2D = power_up.instance()
 	drop.global_position = global_position
-	Globals.level_objects.add_child(drop)
+	Globals.level_objects.call_deferred("add_child", drop)
 
 
 func screen_entered():
