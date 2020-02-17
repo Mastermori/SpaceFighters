@@ -30,7 +30,6 @@ func _physics_process(delta):
 
 func _on_PowerUp_body_entered(body : KinematicBody2D):
 	if body is Player:
-		print("collided with player")
 		give_powerup(body)
 		set_physics_process(false)
 		anim_player.playback_speed = 1
