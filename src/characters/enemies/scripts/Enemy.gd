@@ -105,8 +105,9 @@ func screen_left():
 		should_shoot = false
 	exit_screen()
 
-func queue_free():
-	.queue_free()
+func die():
+	Globals.add_points(points)
+	.die()
 
 func set_shoot(enabled : bool):
 	if enabled and not should_shoot and on_screen:

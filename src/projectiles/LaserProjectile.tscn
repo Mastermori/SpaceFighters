@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [node name="LaserProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-damage = 20.0
+damage = 25.0
 
 [node name="Sprite" parent="." index="0"]
 rotation = 3.14159

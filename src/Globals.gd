@@ -1,5 +1,7 @@
 extends Node
 
+signal score_changed(new_score)
+
 enum Factions {
 	PLAYER,
 	ALIENS,
@@ -12,12 +14,18 @@ var player : KinematicBody2D
 var level : Level setget set_level
 var level_objects : YSort
 
+var score : int = 0
+
 var sound_level : float setget set_sound_level
 
 func _ready():
 	sounds["shoot"] = get_sounds_from_dir("shoot")
 	sounds["hit"] = get_sounds_from_dir("hit")
 	sounds["explosion"] = get_sounds_from_dir("explosion")
+
+func add_points(amount : int):
+	score += amount
+	emit_signal("score_changed", score)
 
 func get_sounds_from_dir(name : String, path := "res://assets/sounds/") -> Array:
 	var dir = Directory.new()

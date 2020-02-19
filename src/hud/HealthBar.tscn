@@ -5,12 +5,14 @@
 [ext_resource path="res://assets/art/gui/healthbar_progress.png" type="Texture" id=3]
 
 [node name="HealthBar" type="TextureProgress"]
-margin_right = 396.0
-margin_bottom = 53.0
-value = 50.0
+margin_right = 200.0
+margin_bottom = 25.0
+value = 100.0
 texture_under = ExtResource( 2 )
-texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]

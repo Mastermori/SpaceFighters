@@ -25,7 +25,7 @@ var force_vel := Vector2.ZERO
 var last_damaged_by
 var dead := false
 var dying := false
-onready var health := max_health
+onready var health := max_health setget set_health
 
 var power_ups := {}
 
@@ -64,14 +64,17 @@ func shoot_at(global_pos : Vector2, projectile : Projectile):
 	shoot_projectile(projectile, dir * shot_speed)
 
 func take_damage(amount : float, caused_by):
-	health -= amount
+	self.health -= amount
 	last_damaged_by = caused_by
-	emit_signal("health_changed", health, health + amount, max_health)
 	if health <= 0:
 		if not dying:
 			die()
 	else:
 		character_anims.play("hit")
+
+func set_health(amount : float):
+	emit_signal("health_changed", amount, health, max_health)
+	health = amount
 
 func die():
 	dying = true

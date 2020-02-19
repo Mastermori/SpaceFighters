@@ -61,7 +61,7 @@ func die():
 func respawn():
 	character_anims.play("respawn")
 	player_anims.play("fly_straight")
-	health = max_health
+	self.health = max_health
 	dying = false
 	dead = false
 	position = spawn_position
