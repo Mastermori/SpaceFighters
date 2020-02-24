@@ -126,5 +126,11 @@ one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="." index="8"]
 one_shot = true
+
+[node name="Left" type="Position2D" parent="BulletSpawns" index="1"]
+position = Vector2( -20, -30 )
+
+[node name="Right" type="Position2D" parent="BulletSpawns" index="2"]
+position = Vector2( 20, -30 )
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

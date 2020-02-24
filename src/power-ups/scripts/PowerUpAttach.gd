@@ -16,6 +16,6 @@ func remove_modifiers():
 func on_shot():
 	pass
 
-func attach(name : String, character : Character, duration : float):
+func attach(character : Character, duration : float):
 	attached_to = character
 	character.add_power_up(name, self, duration)

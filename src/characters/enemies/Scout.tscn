@@ -25,6 +25,7 @@ script = ExtResource( 3 )
 max_health = 25.0
 points = 25
 onscreen_speed = 500.0
+power_up_chances = [ 0.2 ]
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -37,6 +38,6 @@ anims/fly = SubResource( 1 )
 
 [node name="MoveTimer" type="Timer" parent="." index="7"]
 
-[node name="BulletSpawn" parent="BulletSpawns" index="0"]
-position = Vector2( 40, 0 )
+[node name="Middle" parent="BulletSpawns" index="0"]
+position = Vector2( 45, 0 )
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

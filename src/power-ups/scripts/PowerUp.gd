@@ -33,7 +33,7 @@ func _on_PowerUp_body_entered(body : KinematicBody2D):
 			print("ERROR: power-up has no attacher to attach to character!")
 		else:
 			var attacher_inst = attacher.new()
-			attacher_inst.attach(name, body, duration)
+			attacher_inst.attach(body, duration)
 		set_physics_process(false)
 		anim_player.playback_speed = 1
 		anim_player.play("collect")

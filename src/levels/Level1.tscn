@@ -41,10 +41,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HUD" parent="." instance=ExtResource( 9 )]
-margin_right = 607.0
-health_tracking = NodePath("../Objects/Player")
-
 [node name="CloudTimer" type="Timer" parent="."]
 
 [node name="StrafePaths" type="Node2D" parent="."]
@@ -177,12 +173,17 @@ follow_path = NodePath("../../../../StrafePaths/Left")
 
 [node name="CustomGroup1" parent="Objects/Enemies/Scouts" instance=ExtResource( 8 )]
 position = Vector2( 64, -160 )
+enemy_scene = null
 amount = 2
 offset = Vector2( 200, -150 )
+custom_rotation = 0
 
 [node name="CustomGroup2" parent="Objects/Enemies/Scouts/CustomGroup1" instance=ExtResource( 8 )]
 visible = false
+enemy_scene = null
+amount = 3
 offset = Vector2( 0, -300 )
+custom_rotation = 0
 
 [node name="EnemyGroup" parent="Objects/Enemies/Scouts/CustomGroup1/CustomGroup2" instance=ExtResource( 10 )]
 visible = false
@@ -195,16 +196,25 @@ position = Vector2( 0, -1500 )
 
 [node name="CustomGroup1" parent="Objects/Enemies/Scouts2" instance=ExtResource( 8 )]
 position = Vector2( 543, -160 )
+enemy_scene = null
 amount = 2
 offset = Vector2( -200, -150 )
+custom_rotation = 0
 
 [node name="CustomGroup2" parent="Objects/Enemies/Scouts2/CustomGroup1" instance=ExtResource( 8 )]
 visible = false
+enemy_scene = null
+amount = 3
 offset = Vector2( 0, -300 )
+custom_rotation = 0
 
 [node name="EnemyGroup" parent="Objects/Enemies/Scouts2/CustomGroup1/CustomGroup2" instance=ExtResource( 10 )]
 visible = false
 enemy_scene = ExtResource( 6 )
 offset = Vector2( -100, -75 )
 custom_rotation = 90
+
+[node name="HUD" parent="." instance=ExtResource( 9 )]
+margin_right = 607.0
+health_tracking = NodePath("../Objects/Player")
 [connection signal="timeout" from="CloudTimer" to="." method="_on_CloudTimer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/characters/enemies/scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/art/ships/enemy-small.png" type="Texture" id=3]
+[ext_resource path="res://src/power-ups/SideLasers.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.59724, 7.50863 )
@@ -34,6 +35,7 @@ max_health = 20.0
 faction = 1
 shot_speed = 400.0
 shoot_delay = 2.0
+power_up_drops = [ ExtResource( 4 ) ]
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( -0.368042, 8.36831e-14 )
@@ -58,7 +60,7 @@ disabled = true
 [node name="EnemyAnimations" type="AnimationPlayer" parent="." index="6"]
 anims/fly = SubResource( 2 )
 
-[node name="BulletSpawn" parent="BulletSpawns" index="0"]
-position = Vector2( 25, 0 )
+[node name="Middle" parent="BulletSpawns" index="0"]
+position = Vector2( 24.2301, -0.0451431 )
 [connection signal="died" from="." to="." method="_on_Enemy_died"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

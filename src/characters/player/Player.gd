@@ -45,6 +45,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
 			shoot_dir(preload("res://src/projectiles/PlayerProjectile.tscn").instance(), Vector2.UP)
 			shoot_timer.start(shoot_delay)
+			emit_signal("shot")
 
 func keep_in_bounds(delta):
 	var spawn_dist = position - spawn_position

@@ -120,6 +120,7 @@ func set_shoot(enabled : bool):
 func _on_ShootTimer_timeout():
 	if on_screen and not dying and should_shoot:
 		shoot()
+		emit_signal("shot")
 
 func _on_Enemy_died(killer : Node2D):
 	if killer.is_in_group("player"):

@@ -50,24 +50,26 @@ func _ready():
 			node.connect("animation_finished", self, "anim_finished")
 
 # warning-ignore:shadowed_variable
-func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Position2D = bullet_spawns.get_children()[0]):
+func shoot_projectile(projectile : Projectile, vel : Vector2, damage := -1, bullet_spawn_name : String = "Middle"):
 	projectile.init(vel, self)
 	projectile.scale *= bullet_size
+	if not damage == -1:
+		projectile.damage = damage
 	projectile.damage *= bullet_damage_scale
 	projectile.set_as_toplevel(true)
+	var bullet_spawn = bullet_spawns.get_node(bullet_spawn_name)
+	projectile.rotation = vel.angle()
 	projectile.global_position = bullet_spawn.global_position
-	projectile.connect("hit", self, "projectile_hit")
 	bullet_spawn.add_child(projectile)
+	projectile.connect("hit", self, "projectile_hit")
 	Globals.play_sound("shoot", shot_sound_varient, self, false, -40, randf() / 2 + .75 - bullet_size.x / 4)
 
-func shoot_at(projectile : Projectile, global_pos : Vector2):
+func shoot_at(projectile : Projectile, global_pos : Vector2, damage := -1, shot_speed := self.shot_speed):
 	var dir = (global_pos - global_position).normalized()
-	shoot_projectile(projectile, dir * shot_speed)
-	emit_signal("shot")
+	shoot_dir(projectile, dir, damage, shot_speed)
 
-func shoot_dir(projectile : Projectile, dir : Vector2):
-	shoot_projectile(projectile, dir * shot_speed)
-	emit_signal("shot")
+func shoot_dir(projectile : Projectile, dir : Vector2, damage := -1, shot_speed := self.shot_speed):
+	shoot_projectile(projectile, dir * shot_speed, damage)
 
 func take_damage(amount : float, caused_by):
 	self.health -= amount
