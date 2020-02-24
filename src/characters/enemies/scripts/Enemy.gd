@@ -74,7 +74,7 @@ func move_offscreen(delta):
 	position.y += offscreen_speed * delta
 
 func shoot_at_player(projectile : Projectile):
-	shoot_at(Globals.player.get_node("Collider").global_position, projectile)
+	shoot_at(projectile, Globals.player.get_node("Collider").global_position)
 
 func drop_random_power_up(chance_factor : float):
 	var drops := []

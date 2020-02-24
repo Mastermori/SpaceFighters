@@ -4,10 +4,7 @@
 [ext_resource path="res://src/power-ups/scripts/PowerUp.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/effects/explosion.png" type="Texture" id=3]
 
-
-
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "collect"
 length = 0.3
 tracks/0/type = "value"
@@ -47,8 +44,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="Animation" id=2]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -64,7 +60,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 19.7475
 
 [node name="PowerUp" type="Area2D"]
@@ -77,12 +73,12 @@ vframes = 2
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/collect = SubResource( 3 )
-anims/default = SubResource( 1 )
+anims/collect = SubResource( 1 )
+anims/default = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 10.0

@@ -43,7 +43,7 @@ func _physics_process(delta):
 		global_position = new_pos
 		
 		if Input.is_action_pressed("player_shoot") and shoot_timer.is_stopped():
-			shoot_projectile(preload("res://src/projectiles/PlayerProjectile.tscn").instance(), Vector2.UP * shot_speed)
+			shoot_dir(preload("res://src/projectiles/PlayerProjectile.tscn").instance(), Vector2.UP)
 			shoot_timer.start(shoot_delay)
 
 func keep_in_bounds(delta):

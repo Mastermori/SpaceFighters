@@ -21,7 +21,7 @@ func enter_screen():
 
 func shoot():
 #	shoot_at_player(preload("res://projectiles/PinkProjectile.tscn").instance())
-	shoot_projectile(preload("res://src/projectiles/LaserProjectile.tscn").instance(), Vector2.DOWN * shot_speed)
+	shoot_dir(preload("res://src/projectiles/LaserProjectile.tscn").instance(), Vector2.DOWN)
 
 
 func _on_MoveTimer_timeout():

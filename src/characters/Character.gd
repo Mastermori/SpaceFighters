@@ -4,6 +4,7 @@ class_name Character
 
 signal died(killer)
 signal health_changed(health, last_health, max_health)
+signal shot()
 
 export var acceleration := 1500
 export var deceleration := 3000
@@ -59,9 +60,14 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, bullet_spawn : Pos
 	bullet_spawn.add_child(projectile)
 	Globals.play_sound("shoot", shot_sound_varient, self, false, -40, randf() / 2 + .75 - bullet_size.x / 4)
 
-func shoot_at(global_pos : Vector2, projectile : Projectile):
+func shoot_at(projectile : Projectile, global_pos : Vector2):
 	var dir = (global_pos - global_position).normalized()
 	shoot_projectile(projectile, dir * shot_speed)
+	emit_signal("shot")
+
+func shoot_dir(projectile : Projectile, dir : Vector2):
+	shoot_projectile(projectile, dir * shot_speed)
+	emit_signal("shot")
 
 func take_damage(amount : float, caused_by):
 	self.health -= amount
@@ -117,34 +123,42 @@ func set_later(var_name : String, val, time : float):
 	yield(get_tree().create_timer(time), "timeout")
 	set(var_name, val)
 
-func add_power_up(name : String, var_names : Array, values : Array, time : float):
-	if not var_names.size() == values.size():
-		print("Tried to add power up with uneven vars and vals to " + self.name)
-		return
+func add_power_up(name : String, power_up : Node2D, time : float):
+	# Reset timer if power-up already collected
 	if power_ups.has(name):
-		power_ups[name][2].start()
+		power_ups[name][1].start()
 		return
-	for i in range(var_names.size()):
-		var var_name : String = var_names[i]
-		var value = values[i]
-		set(var_name, get(var_name) + value)
+	
+	# Add power-up to node
+	add_child(power_up)
+	power_up.owner = self
+	power_up.apply_modifiers()
+	connect("shot", power_up, "on_shot")
+	
+	# Create timer to remove power-up
 	var timer := Timer.new()
 	timer.name = name + "Timer"
 	timer.wait_time = time
-	timer.one_shot = false
-	add_child(timer)
+	timer.one_shot = true
+	power_up.add_child(timer)
 	timer.connect("timeout", self, "remove_power_up", [name])
 	timer.start()
-	power_ups[name] = [var_names, values, timer]
+	timer.owner = power_up
+	
+	# Add power-up to list
+	power_ups[name] = [power_up, timer]
 
 func remove_power_up(name):
 	var power_up = power_ups[name]
-	for i in range(power_up[0].size()):
-		var var_name : String = power_up[0][i]
-		var value = power_up[1][i]
-		set(var_name, get(var_name) - value)
-	power_up[2].stop()
-	power_up[2].queue_free()
+	
+	# Remove power-up node
+	disconnect("shot", power_up[0], "on_shot")
+	power_up[0].remove_modifiers()
+	power_up[0].queue_free()
+	
+	# Remove timer
+	power_up[1].stop()
+	power_up[1].queue_free()
 	power_ups.erase(name)
 
 

@@ -3,22 +3,21 @@ extends Area2D
 class_name PowerUp
 
 export var move_speed := 100
+export var duration := 5
+export var attacher : GDScript
 
-var should_move := false
+var is_dropping := false
 var vel := Vector2.ZERO
 
 onready var anim_player := $AnimationPlayer
 onready var move_timer := $MoveTimer
 
-# to be overwritten in children
-func give_powerup(player : Player):
-	pass
 
 func _ready():
 	anim_player.play("default")
 
 func _physics_process(delta):
-	if should_move:
+	if is_dropping:
 		vel += Vector2.DOWN * delta
 		position += vel * move_speed * delta
 	else:
@@ -30,14 +29,17 @@ func _physics_process(delta):
 
 func _on_PowerUp_body_entered(body : KinematicBody2D):
 	if body is Player:
-		give_powerup(body)
+		if attacher == null:
+			print("ERROR: power-up has no attacher to attach to character!")
+		else:
+			var attacher_inst = attacher.new()
+			attacher_inst.attach(name, body, duration)
 		set_physics_process(false)
 		anim_player.playback_speed = 1
 		anim_player.play("collect")
 
-
 func _on_MoveTimer_timeout():
-	should_move = true
+	is_dropping = true
 
 
 func _on_VisibilityNotifier2D_screen_exited():

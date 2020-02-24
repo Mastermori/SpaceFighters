@@ -1,4 +1,14 @@
-extends PowerUp
+extends PowerUpAttach
 
-func give_powerup(player : Player):
-	player.add_power_up("bigger_bullets", ["bullet_size", "bullet_damage_scale"], [Vector2(1, 1), .5], 5)
+export var bullet_scale := Vector2(2, 1.5)
+export var damage_scale_add := .5
+
+func apply_modifiers():
+	print("applied modifiers")
+	attached_to.bullet_size += bullet_scale
+	attached_to.bullet_damage_scale += damage_scale_add
+
+func remove_modifiers():
+	print("removed modifiers")
+	attached_to.bullet_size -= bullet_scale
+	attached_to.bullet_damage_scale -= damage_scale_add
