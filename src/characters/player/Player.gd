@@ -73,7 +73,7 @@ func _on_RespawnTimer_timeout():
 	respawn()
 
 func _on_InvincibilityTimer_timeout():
-	$Collider.set_deferred("disabled", false)
+	collider.set_deferred("disabled", false)
 
 func anim_finished(anim_name):
 	pass

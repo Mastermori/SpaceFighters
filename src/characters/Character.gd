@@ -33,6 +33,7 @@ var power_ups := {}
 onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var sprite : Sprite = $Sprite
 onready var bullet_spawns : Node2D = $BulletSpawns
+onready var collider : CollisionObject2D = $Collider
 onready var window_width : int = ProjectSettings.get("display/window/size/width")
 onready var window_height : int = ProjectSettings.get("display/window/size/height")
 
@@ -87,7 +88,7 @@ func set_health(amount : float):
 func die():
 	dying = true
 	character_anims.play("die")
-	$Collider.set_deferred("disabled", true)
+	collider.set_deferred("disabled", true)
 	Globals.play_random_sound("explosion", self, true, -20, randf() / 5 + .9)
 	emit_signal("died", last_damaged_by)
 
@@ -98,8 +99,8 @@ func apply_movement(acceleration : Vector2):
 		vel = vel.normalized() * max_speed
 
 func check_bounds(minx, miny, maxx, maxy) -> bool:
-	var in_x : bool = global_position.x + sprite.texture.get_size().x / 2 > minx and global_position.x - sprite.texture.get_size().x / 2 < maxx
-	var in_y : bool = global_position.y + sprite.texture.get_size().y / 2 > miny and global_position.y - sprite.texture.get_size().y / 2 < maxy
+	var in_x : bool = global_position.x + sprite.get_rect().end.x > minx and global_position.x + sprite.get_rect().position.x < maxx
+	var in_y : bool = global_position.y + sprite.get_rect().end.y > miny and global_position.y + sprite.get_rect().position.y < maxy
 	return in_x and in_y
 
 func apply_impulse():

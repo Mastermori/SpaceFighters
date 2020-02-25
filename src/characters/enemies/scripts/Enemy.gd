@@ -73,8 +73,8 @@ func no_bullets() -> bool:
 func move_offscreen(delta):
 	position.y += offscreen_speed * delta
 
-func shoot_at_player(projectile : Projectile):
-	shoot_at(projectile, Globals.player.get_node("Collider").global_position)
+func shoot_at_player(projectile : Projectile, damage := -1, shot_speed := self.shot_speed):
+	shoot_at(projectile, Globals.player.get_node("Collider").global_position, damage, shot_speed)
 
 func drop_random_power_up(chance_factor : float):
 	var drops := []
@@ -94,13 +94,13 @@ func screen_entered():
 	on_screen = true
 	if should_shoot:
 		shoot_timer.start(first_shot_delay)
-	$Collider.set_deferred("disabled", false)
+	collider.set_deferred("disabled", false)
 	enter_screen()
 
 func screen_left():
 	on_screen = false
 	left_screen = true
-	$Collider.set_deferred("disabled", true)
+	collider.set_deferred("disabled", true)
 	if should_shoot:
 		should_shoot = false
 	exit_screen()
