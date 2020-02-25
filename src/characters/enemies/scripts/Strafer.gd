@@ -25,7 +25,8 @@ func enter_screen(use_remote_transform := false):
 			set_owner(follow)
 
 func queue_free():
-	follow.queue_free()
+	if follow:
+		follow.queue_free()
 	.queue_free()
 
 func move(delta):

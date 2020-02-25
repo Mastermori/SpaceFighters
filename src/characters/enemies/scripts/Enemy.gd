@@ -17,6 +17,8 @@ export(Array, float) var power_up_chances := [.1]
 var on_screen := false
 var left_screen := false
 
+var free_check := false
+
 onready var shoot_timer := $ShootTimer
 onready var enemy_anims : AnimationPlayer = $EnemyAnimations
 
@@ -53,7 +55,7 @@ func process_movement(delta):
 			move_offscreen(delta)
 
 func process_bounds():
-	var in_bounds := check_bounds(0, -10, window_width, window_height)
+	var in_bounds := check_bounds(-5, -10, window_width+5, window_height+10)
 	if not on_screen and not left_screen:
 		if in_bounds:
 			screen_entered()
@@ -62,7 +64,11 @@ func process_bounds():
 
 func process_death():
 	if (left_screen or dead) and no_bullets():
-		queue_free()
+		if not free_check:
+			queue_free()
+			free_check = true
+		else:
+			print("Tried to free already freed!")
 
 func no_bullets() -> bool:
 	for spawn in bullet_spawns.get_children():
