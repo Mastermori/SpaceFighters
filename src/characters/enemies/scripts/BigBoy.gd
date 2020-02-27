@@ -7,7 +7,7 @@ export var move_x_bounds := 100
 
 export var rocket_delay := 1.5
 
-export var lasers_delay := 1
+export var lasers_delay := 1.0
 export var laser_count := 3
 
 var rocket_counter := 0
@@ -56,11 +56,11 @@ func shoot_rockets():
 	pass
 
 func shoot_lasers():
-	bullet_size *= .75
+	bullet_size *= .7
 	for i in range(laser_count):
 		shoot_laser(Vector2.DOWN.rotated(i * 1.0 / laser_count - .25), "LeftLasers")
 		shoot_laser(Vector2.DOWN.rotated(i * 1.0 / laser_count - .25), "RightLasers")
-	bullet_size /= .75
+	bullet_size /= .7
 
 
 func shoot_laser(dir : Vector2, spawn_name : String):

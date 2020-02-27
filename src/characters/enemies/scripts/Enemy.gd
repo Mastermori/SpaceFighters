@@ -56,7 +56,7 @@ func process_movement(delta):
 			move_offscreen(delta)
 
 func process_bounds():
-	var in_bounds := check_bounds(-5, -10, window_width+5, window_height+10)
+	var in_bounds := check_bounds(-5, -10, Globals.window_width+5, Globals.window_height+10)
 	if not on_screen and not left_screen:
 		if in_bounds:
 			screen_entered()

@@ -34,8 +34,7 @@ onready var character_anims : AnimationPlayer = $CharacterAnimations
 onready var sprite : Sprite = $Sprite
 onready var bullet_spawns : Node2D = $BulletSpawns
 onready var collider : CollisionObject2D = $Collider
-onready var window_width : int = ProjectSettings.get("display/window/size/width")
-onready var window_height : int = ProjectSettings.get("display/window/size/height")
+
 
 # to be overwritten - called when any Animation is finished
 func anim_finished(_anim_name):
