@@ -41,6 +41,7 @@ func exit_screen():
 func _ready():
 	shoot_timer.wait_time = shoot_delay
 	enemy_anims.play("fly")
+	collider.set_deferred("disabled", true)
 
 func _physics_process(delta):
 	process_bounds()
