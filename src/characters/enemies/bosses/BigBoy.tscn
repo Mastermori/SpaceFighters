@@ -16,7 +16,7 @@ power_up_drops = [ ExtResource( 3 ) ]
 
 [node name="Sprite" parent="." index="0"]
 rotation = 0.0
-scale = Vector2( 10, 10 )
+scale = Vector2( 15, 15 )
 texture = ExtResource( 2 )
 
 [node name="ExplosionSprite" parent="." index="2"]
@@ -42,6 +42,7 @@ position = Vector2( 70, 72 )
 [node name="LaserTimer" type="Timer" parent="." index="8"]
 
 [node name="Collider" type="CollisionPolygon2D" parent="." index="9"]
+scale = Vector2( 1.5, 1.5 )
 polygon = PoolVector2Array( 109.806, 71.179, 69.3077, 71.2119, 68.4091, 60.4597, 35.9842, 61.178, 10.2275, 80.9248, -10.7554, 80.9788, -28.1045, 60.5454, -70.0313, 59.959, -70.3851, 70.9549, -110.866, 71.0834, -161.243, 40.2405, -161.157, 19.9039, -0.185272, -81.4855, 159.785, 20.9053, 159.785, 39.6811 )
 [connection signal="timeout" from="RocketTimer" to="." method="_on_RocketTimer_timeout"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]

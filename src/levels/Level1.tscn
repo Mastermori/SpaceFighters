@@ -10,7 +10,7 @@
 [ext_resource path="res://src/characters/enemies/groups/CustomGroup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/hud/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/characters/enemies/groups/EnemyGroup.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/characters/enemies/BigBoy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/characters/enemies/bosses/BigBoy.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
