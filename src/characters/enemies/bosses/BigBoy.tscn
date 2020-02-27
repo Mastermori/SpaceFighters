@@ -12,7 +12,9 @@ shot_speed = 800.0
 shoot_delay = 3.0
 bullet_size = Vector2( 2, 2 )
 shot_sound_varient = 0
+onscreen_speed = 150.0
 power_up_drops = [ ExtResource( 3 ) ]
+move_x_bounds = 150
 
 [node name="Sprite" parent="." index="0"]
 rotation = 0.0
