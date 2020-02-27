@@ -76,6 +76,8 @@ func play_sound(sound : String, sound_index : int, parent : Node, is_positional 
 	audio_stream_player.bus = bus
 	audio_stream_player.stream = sounds[sound][sound_index]
 	audio_stream_player.volume_db = volume_db
+	if pitch_scale <= 0:
+		pitch_scale = 0.001
 	audio_stream_player.pitch_scale = pitch_scale
 	audio_stream_player.play()
 	audio_stream_player.connect("finished", audio_stream_player, "queue_free")
