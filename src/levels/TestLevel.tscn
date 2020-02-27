@@ -1,141 +1,20 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/characters/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/levels/scripts/Level1.gd" type="Script" id=2]
-[ext_resource path="res://src/characters/enemies/Scout.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/characters/enemies/groups/CustomGroup.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/characters/enemies/groups/EnemyGroup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/levels/TestLevel.gd" type="Script" id=2]
 [ext_resource path="res://src/hud/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/enemies/bosses/BigBoy.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/characters/enemies/groups/StraferGroup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/art/backgrounds/desert-backgorund.png" type="Texture" id=9]
-[ext_resource path="res://assets/art/backgrounds/clouds.png" type="Texture" id=10]
-[ext_resource path="res://assets/art/backgrounds/clouds-transparent.png" type="Texture" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( -600.053, -137.501, 600.053, 137.501, -4.00134, 3.65045, 0, 0, 0, 0, -33.6606, 443.624 )
 }
 
-[node name="TestLevel" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 303.5, 625 )
-
-[node name="Level1" type="Node2D" parent="." groups=[
+[node name="TestLevel" type="Node2D" groups=[
 "level",
 ]]
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-cloud_timer_max = 8.0
-cloud_types = [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 10 ) ]
-
-[node name="StrafePaths" type="Node2D" parent="Level1"]
-
-[node name="Left" type="Path2D" parent="Level1/StrafePaths"]
-curve = SubResource( 1 )
-
-[node name="Right" type="Path2D" parent="Level1/StrafePaths"]
-position = Vector2( 607, 0 )
-rotation = 3.14159
-scale = Vector2( 1, -1 )
-curve = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Objects" type="YSort" parent="Level1"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Player" parent="Level1/Objects" instance=ExtResource( 1 )]
-position = Vector2( 311.019, 685.792 )
-z_index = 100
-max_speed = 75
-
-[node name="Enemies" type="YSort" parent="Level1/Objects"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Strafer" type="YSort" parent="Level1/Objects/Enemies"]
-
-[node name="StraferGroup" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 480, -96 )
-offset = Vector2( 0, 20 )
-
-[node name="StraferGroup2" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 32, -256 )
-offset = Vector2( 0, 20 )
-
-[node name="StraferGroup3" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 480, -512 )
-offset = Vector2( 0, 20 )
-
-[node name="StraferGroup4" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 32, -512 )
-offset = Vector2( 0, 20 )
-
-[node name="StraferGroup6" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 480, -768 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Right")
-
-[node name="StraferGroup5" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 32, -768 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Left")
-
-[node name="StraferGroup8" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 480, -1024 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Right")
-
-[node name="StraferGroup7" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 32, -1024 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Left")
-
-[node name="StraferGroup10" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 480, -1280 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Right")
-
-[node name="StraferGroup9" parent="Level1/Objects/Enemies/Strafer" instance=ExtResource( 8 )]
-position = Vector2( 32, -1280 )
-offset = Vector2( 0, 20 )
-follow_path = NodePath("../../../../StrafePaths/Left")
-
-[node name="Scouts" type="YSort" parent="Level1/Objects/Enemies"]
-
-[node name="CustomGroup1" parent="Level1/Objects/Enemies/Scouts" instance=ExtResource( 4 )]
-position = Vector2( 64, -160 )
-enemy_scene = null
-amount = 2
-offset = Vector2( 200, -150 )
-custom_rotation = 0
-
-[node name="CustomGroup2" parent="Level1/Objects/Enemies/Scouts/CustomGroup1" instance=ExtResource( 4 )]
-visible = false
-enemy_scene = null
-amount = 3
-offset = Vector2( 0, -300 )
-custom_rotation = 0
-
-[node name="EnemyGroup" parent="Level1/Objects/Enemies/Scouts/CustomGroup1/CustomGroup2" instance=ExtResource( 5 )]
-visible = false
-enemy_scene = ExtResource( 3 )
-offset = Vector2( 100, -75 )
-
-[node name="BigBoy" parent="Level1/Objects/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 283.928, -1589.99 )
-
-[node name="HUD" parent="Level1" instance=ExtResource( 6 )]
-margin_right = 607.0
-health_tracking = NodePath("../Objects/Player")
 
 [node name="Background" type="TextureRect" parent="."]
 margin_right = 607.0
@@ -153,4 +32,39 @@ __meta__ = {
 }
 
 [node name="CloudTimer" type="Timer" parent="."]
-[connection signal="timeout" from="CloudTimer" to="Level1" method="_on_CloudTimer_timeout"]
+
+[node name="StrafePaths" type="Node2D" parent="."]
+
+[node name="Left" type="Path2D" parent="StrafePaths"]
+curve = SubResource( 1 )
+
+[node name="Right" type="Path2D" parent="StrafePaths"]
+position = Vector2( 607, 0 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+curve = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Objects" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="Objects" instance=ExtResource( 1 )]
+position = Vector2( 311.019, 685.792 )
+z_index = 100
+max_speed = 75
+
+[node name="Enemies" type="YSort" parent="Objects"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BigBoy" parent="Objects/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 311.89, -131.996 )
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+margin_right = 607.0
+health_tracking = NodePath("../Objects/Player")
