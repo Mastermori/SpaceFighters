@@ -65,12 +65,12 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, damage := -1, bull
 	projectile.connect("hit", self, "projectile_hit")
 	Globals.play_sound("shoot", shot_sound_varient, self, false, -40, randf() / 2 + .75 - bullet_size.x / 4)
 
-func shoot_at(projectile : Projectile, global_pos : Vector2, damage := -1, shot_speed := self.shot_speed):
+func shoot_at(projectile : Projectile, global_pos : Vector2, damage := -1, shot_speed := self.shot_speed, bullet_spawn_name : String = "Middle"):
 	var dir = (global_pos - global_position).normalized()
-	shoot_dir(projectile, dir, damage, shot_speed)
+	shoot_dir(projectile, dir, damage, shot_speed, bullet_spawn_name)
 
-func shoot_dir(projectile : Projectile, dir : Vector2, damage := -1, shot_speed := self.shot_speed):
-	shoot_projectile(projectile, dir * shot_speed, damage)
+func shoot_dir(projectile : Projectile, dir : Vector2, damage := -1, shot_speed := self.shot_speed, bullet_spawn_name : String = "Middle"):
+	shoot_projectile(projectile, dir * shot_speed, damage, bullet_spawn_name)
 
 func take_damage(amount : float, caused_by):
 	self.health -= amount
