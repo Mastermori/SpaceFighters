@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/art/ships/enemy-small.png" type="Texture" id=3]
 [ext_resource path="res://src/power-ups/SideLasers.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "fly"
 length = 0.5
 loop = true
@@ -53,6 +53,6 @@ position = Vector2( 24.2301, -0.0451431 )
 [node name="ShootTimer" type="Timer" parent="." index="5"]
 
 [node name="EnemyAnimations" type="AnimationPlayer" parent="." index="6"]
-anims/fly = SubResource( 2 )
+anims/fly = SubResource( 1 )
 [connection signal="died" from="." to="." method="_on_Enemy_died"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
