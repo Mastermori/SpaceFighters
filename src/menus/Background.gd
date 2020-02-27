@@ -11,7 +11,7 @@ func _ready():
 	move_to_random()
 
 func move_to_random():
-	yield(get_tree().create_timer(rand_range(1, 5)), "timeout")
+	yield(get_tree().create_timer(rand_range(3, 10)), "timeout")
 	var pos_max = Vector2(0, 0)
 	var pos_min = Vector2(Globals.window_width-rect_size.x, Globals.window_height-rect_size.y)
 	print(pos_min)
