@@ -7,3 +7,6 @@ https://ansimuz.itch.io/spaceship-shooter-environment
 
 The shoot and explosion sounds:
 https://opengameart.org/content/8-bit-sound-effects-library
+
+Future font:
+https://mozz.itch.io/space-madness
