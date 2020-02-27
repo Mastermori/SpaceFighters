@@ -1,7 +1,7 @@
 extends TextureRect
 
 export var speed_min := 100
-export var speed_max := 100
+export var speed_max := 200
 
 onready var tween := $Tween
 
