@@ -63,7 +63,7 @@ func shoot_projectile(projectile : Projectile, vel : Vector2, damage := -1, bull
 	projectile.global_position = bullet_spawn.global_position
 	bullet_spawn.add_child(projectile)
 	projectile.connect("hit", self, "projectile_hit")
-	Globals.play_sound("shoot", shot_sound_varient, self, false, -40, randf() / 2 + .75 - bullet_size.x / 4)
+	Globals.play_sound("shoot", shot_sound_varient, self, -40, randf() / 2 + .75 - bullet_size.x / 4)
 
 func shoot_at(projectile : Projectile, global_pos : Vector2, damage := -1, shot_speed := self.shot_speed, bullet_spawn_name : String = "Middle"):
 	var dir = (global_pos - global_position).normalized()
@@ -89,7 +89,7 @@ func die():
 	dying = true
 	character_anims.play("die")
 	collider.set_deferred("disabled", true)
-	Globals.play_random_sound("explosion", self, true, -20, randf() / 5 + .9)
+	Globals.play_random_sound("explosion", self, -20, randf() / 5 + .9)
 	emit_signal("died", last_damaged_by)
 
 # warning-ignore:shadowed_variable
