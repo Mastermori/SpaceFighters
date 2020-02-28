@@ -26,17 +26,20 @@ func _ready():
 	add_sound("shoot")
 	add_sound("hit")
 	add_sound("explosion")
+
+	add_sound("ui/click")
+
 	add_music("relaxing")
 
 func add_points(amount : int):
 	score += amount
 	emit_signal("score_changed", score)
 
-func add_sound(name : String):
-	sounds[name] = get_audio_from_dir("sounds/" + name)
+func add_sound(name : String, custom_path := ""):
+	sounds[name] = get_audio_from_dir("sounds/" + custom_path + name)
 
-func add_music(name : String):
-	music[name] = get_audio_from_dir("music/" + name)
+func add_music(name : String , custom_path := ""):
+	music[name] = get_audio_from_dir("music/" + custom_path + name)
 
 func get_audio_from_dir(name : String, path := "res://assets/") -> Array:
 	var dir = Directory.new()
@@ -74,12 +77,22 @@ func change_scene(new_scene : Node, clear_level := true):
 	get_tree().set_current_scene(new_scene)
 
 func play_music(name : String , index : int, parent : Node, volume_db = 0.0, pitch_scale = 1.0, is_positional := false, bus = "Music") -> void:
+	if not music.has(name):
+		add_music(name)
+		if music[name].size() < 1:
+			print("Can't find music: " + str(name))
+			return
 	play_audio(music[name][index], parent, volume_db, pitch_scale, is_positional, bus)
 
 func play_random_music(name : String, parent : Node, volume_db = 0.0, pitch_scale = 1.0, is_positional := false, bus := "Music") -> void:
 	play_music(name, randi() % music[name].size(), parent, volume_db, pitch_scale, is_positional, bus)
 
 func play_sound(name : String, index : int, parent : Node, volume_db = 0.0, pitch_scale = 1.0, is_positional := true, bus = "SFX") -> void:
+	if not sounds.has(name):
+		add_sound(name)
+		if sounds[name].size() < 1:
+			print("Can't find sound: " + str(name))
+			return
 	play_audio(sounds[name][index], parent, volume_db, pitch_scale, is_positional, bus)
 
 func play_random_sound(name : String, parent : Node, volume_db = 0.0, pitch_scale = 1.0, is_positional := true, bus := "SFX") -> void:
