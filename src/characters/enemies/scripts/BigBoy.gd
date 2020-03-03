@@ -62,9 +62,8 @@ func shoot_lasers():
 		shoot_laser(Vector2.DOWN.rotated(i * 1.0 / laser_count - .25), "RightLasers")
 	bullet_size /= .7
 
-
 func shoot_laser(dir : Vector2, spawn_name : String):
-	shoot_projectile(preload("res://src/projectiles/LaserProjectile.tscn").instance(), dir * (self.shot_speed*1.2), 15, spawn_name)
+	shoot_projectile(preload("res://src/projectiles/LaserProjectile.tscn").instance(), dir * (self.shot_speed), 15, spawn_name)
 
 
 func _on_RocketTimer_timeout():

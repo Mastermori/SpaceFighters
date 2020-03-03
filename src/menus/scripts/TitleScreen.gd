@@ -13,4 +13,4 @@ func _on_ExitButton_pressed():
 
 
 func _on_TestButton_pressed():
-	pass
+	Globals.find_level("TestLevel")
